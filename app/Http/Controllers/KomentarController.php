@@ -31,6 +31,9 @@ class KomentarController extends Controller
                 'message' => 'Data tidak ditemukan'
             ]);
         }
+    }
 
+    public function storeByIdKomik($komik_id, Request $request) {
+        //Menambahkan Komentar
     }
 }

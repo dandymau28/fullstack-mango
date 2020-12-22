@@ -31,6 +31,5 @@ class PilihanJawabanController extends Controller
                 'message' => 'Data tidak ditemukan'
             ]);
         }
-
     }
 }

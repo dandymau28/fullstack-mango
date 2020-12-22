@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use DB;
 
 class UserController extends Controller
@@ -32,5 +37,13 @@ class UserController extends Controller
                 'message' => 'Data tidak ditemukan'
             ]);
         }
+    }
+
+    public function updateByIdUser($user_id, Request $request) {
+        //Mengubah data profil
+    }
+
+    public function updatePasswordByIdUser($user_id, Request $request) {
+        //Mengubah password
     }
 }

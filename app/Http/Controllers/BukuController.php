@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BukuModel as Buku;
+use Auth;
 
 class BukuController extends Controller
 {
@@ -21,6 +22,7 @@ class BukuController extends Controller
             return response()->json([
                 'code' => 200,
                 'message' => 'Data berhasil ditemukan!',
+                'user' => Auth::user(),
                 'data' => $data
             ], 200);
         } else {
