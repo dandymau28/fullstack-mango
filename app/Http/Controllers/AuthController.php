@@ -102,4 +102,13 @@ class AuthController extends Controller
             'message' => 'Berhasil verifikasi'
         ], 200);
     }
+
+    public function logout() {
+        auth()->logout();
+
+        return response()->json([
+            'code' => 200,
+            'message' => 'Logout berhasil'
+        ], 200);
+    }
 }

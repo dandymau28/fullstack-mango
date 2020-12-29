@@ -34,7 +34,7 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/komik/{komik_id}/materi', 'MateriController@showByIdKomik');
     Route::get('/komik/{komik_id}/ujian', 'UjianController@showByIdKomik');
     Route::get('/komik/{komik_id}/komentar', 'KomentarController@showByIdKomik');
-    Route::post('/komik/{komik_id}/komentar', 'KomentarController@storeByIdKomik'); //belum
+    Route::post('/komik/{komik_id}/komentar', 'KomentarController@storeByIdKomik');
     
     //Route Ujian
     Route::get('/ujian/{ujian_id}/soal', 'SoalController@showByIdUjian');
@@ -46,9 +46,13 @@ Route::middleware('auth:api')->group(function() {
     // Route Nilai
     Route::get('/nilai', 'NilaiController@index');
     Route::get('/nilai/{ujian_id}/ujian', 'NilaiController@showByIdUjian');
+    Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); //belum diuji
     
     // Route User
     Route::get('/user/{user_id}', 'UserController@showByIdUser');
-    Route::put('/user/{user_id}', 'UserController@updateByIdUser'); //belum
-    Route::put('/user/{user_id}/ubah-sandi', 'UserController@updatePasswordByIdUser'); //belum
+    Route::put('/user/{user_id}', 'UserController@updateByIdUser');
+    Route::put('/user/{user_id}/ubah-sandi', 'UserController@updatePasswordByIdUser');
+
+    //Route Logout
+    Route::post('/logout', 'AuthController@logout');
 });

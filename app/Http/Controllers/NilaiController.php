@@ -57,4 +57,30 @@ class NilaiController extends Controller
             ]);
         }
     }
+
+    public function showByIdUser($user_id) {
+        try {
+            $data = Nilai::whereNull('deleted_at')
+                    ->where('user_id', $user_id)
+                    ->get();
+        } catch (\Exception $e) {
+            return response()->json([
+                'code' => 500,
+                'message' => 'Internal Server Error. ErrMsg = ' . $e->getMessage()
+            ], 500);
+        }
+
+        if (!$data->isEmpty()) {
+            return response()->json([
+                'code' => 200,
+                'message' => 'Data ditemukan',
+                'data' => $data
+            ], 200);
+        } else {
+            return response()->json([
+                'code' => 400,
+                'message' => 'Data tidak ditemukan'
+            ], 400);
+        }
+    }
 }
