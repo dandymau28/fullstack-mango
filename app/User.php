@@ -55,6 +55,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Models\UserUjianStatusModel', 'user_id', 'user_id');
     }
 
+    public function profil() {
+        return $this->hasOne('App\Models\ProfilUserModel', 'user_id', 'user_id');
+    }
+
     // Rest omitted for brevity
 
     /**
