@@ -2696,7 +2696,6 @@
             "support": {
                 "issues": "https://github.com/swiftmailer/swiftmailer/issues",
                 "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.4"
-<<<<<<< HEAD
             },
             "funding": [
                 {
@@ -2718,29 +2717,6 @@
                 "url": "https://github.com/symfony/console.git",
                 "reference": "47c02526c532fb381374dab26df05e7313978976"
             },
-=======
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/swiftmailer/swiftmailer",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-12-08T18:02:06+00:00"
-        },
-        {
-            "name": "symfony/console",
-            "version": "v5.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/console.git",
-                "reference": "47c02526c532fb381374dab26df05e7313978976"
-            },
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/47c02526c532fb381374dab26df05e7313978976",
@@ -5025,18 +5001,6 @@
         },
         {
             "name": "tymon/jwt-auth",
-<<<<<<< HEAD
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tymondesigns/jwt-auth.git",
-                "reference": "e588cb719539366c0e2f6017f975379cb73e9680"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/e588cb719539366c0e2f6017f975379cb73e9680",
-                "reference": "e588cb719539366c0e2f6017f975379cb73e9680",
-=======
             "version": "dev-develop",
             "source": {
                 "type": "git",
@@ -5047,7 +5011,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/tymondesigns/jwt-auth/zipball/fb0cfc8b6bf82ec3ace2eed10f27db0da064d8f9",
                 "reference": "fb0cfc8b6bf82ec3ace2eed10f27db0da064d8f9",
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
                 "shasum": ""
             },
             "require": {
@@ -5120,11 +5083,7 @@
                     "type": "patreon"
                 }
             ],
-<<<<<<< HEAD
-            "time": "2020-11-27T12:32:42+00:00"
-=======
             "time": "2020-12-10T09:51:15+00:00"
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
         },
         {
             "name": "vlucas/phpdotenv",
@@ -5416,18 +5375,6 @@
         },
         {
             "name": "facade/ignition",
-<<<<<<< HEAD
-            "version": "2.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/facade/ignition.git",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/d8dc4f90ed469f9f9313b976fb078c20585d5c99",
-                "reference": "d8dc4f90ed469f9f9313b976fb078c20585d5c99",
-=======
             "version": "2.5.8",
             "source": {
                 "type": "git",
@@ -5438,7 +5385,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/facade/ignition/zipball/8e907d81244649c5ea746e2ec30c32c5f59df472",
                 "reference": "8e907d81244649c5ea746e2ec30c32c5f59df472",
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
                 "shasum": ""
             },
             "require": {
@@ -5502,11 +5448,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-<<<<<<< HEAD
-            "time": "2020-12-09T20:25:45+00:00"
-=======
             "time": "2020-12-29T09:12:55+00:00"
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
         },
         {
             "name": "facade/ignition-contracts",
@@ -5628,18 +5570,6 @@
         },
         {
             "name": "fzaninotto/faker",
-<<<<<<< HEAD
-            "version": "v1.9.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "848d8125239d7dbf8ab25cb7f054f1a630e68c2e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/848d8125239d7dbf8ab25cb7f054f1a630e68c2e",
-                "reference": "848d8125239d7dbf8ab25cb7f054f1a630e68c2e",
-=======
             "version": "dev-master",
             "source": {
                 "type": "git",
@@ -5650,7 +5580,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/5ffe7db6c80f441f150fc88008d64e64af66634b",
                 "reference": "5ffe7db6c80f441f150fc88008d64e64af66634b",
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
                 "shasum": ""
             },
             "require": {
@@ -5690,17 +5619,10 @@
             ],
             "support": {
                 "issues": "https://github.com/fzaninotto/Faker/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/fzaninotto/Faker/tree/v1.9.2"
-            },
-            "abandoned": true,
-            "time": "2020-12-11T09:56:16+00:00"
-=======
                 "source": "https://github.com/fzaninotto/Faker/tree/master"
             },
             "abandoned": true,
             "time": "2020-12-11T09:59:14+00:00"
->>>>>>> 412bb8245d22b57b5d80451ac4de71a5884e469e
         },
         {
             "name": "hamcrest/hamcrest-php",
