@@ -46,7 +46,7 @@ Route::middleware('auth:api')->group(function() {
     // Route Nilai
     Route::get('/nilai', 'NilaiController@index');
     Route::get('/nilai/{ujian_id}/ujian', 'NilaiController@showByIdUjian');
-    Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); //belum
+    Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); //belum diuji
     
     // Route User
     Route::get('/user/{user_id}', 'UserController@showByIdUser');

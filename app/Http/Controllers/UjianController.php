@@ -33,9 +33,7 @@ class UjianController extends Controller
         }
     }
 
-    public function storeByIdUjian ($ujian_id, Request $request) {
+    public function storeByIdUjian (Request $request, $ujian_id) {
         //Memproses hasil ujian dan menginput ke tabel nilai
-
-        
     }
 }
