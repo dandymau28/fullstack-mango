@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //Route Auth
 Route::post('/register', 'AuthController@register');
-Route::put('/user/{code}/verifikasi', 'AuthController@verification'); //belum
+Route::put('/user/{code}/verifikasi', 'AuthController@verification'); 
 Route::post('/login', 'AuthController@login')->name('login');
 
 Route::middleware('auth:api')->group(function() {
@@ -38,7 +38,7 @@ Route::middleware('auth:api')->group(function() {
     
     //Route Ujian
     Route::get('/ujian/{ujian_id}/soal', 'SoalController@showByIdUjian');
-    Route::post('/ujian/{ujian_id}', 'UjianController@storeByIdUjian'); //belum
+    Route::post('/ujian/{ujian_id}', 'UjianController@storeByIdUjian'); 
     
     //Route Soal
     Route::get('/soal/{soal_id}/jawaban', 'PilihanJawabanController@showByIdSoal');
@@ -46,7 +46,7 @@ Route::middleware('auth:api')->group(function() {
     // Route Nilai
     Route::get('/nilai', 'NilaiController@index');
     Route::get('/nilai/{ujian_id}/ujian', 'NilaiController@showByIdUjian');
-    Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); //belum diuji
+    Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); 
     
     // Route User
     Route::get('/user/{user_id}', 'UserController@showByIdUser');
@@ -55,4 +55,6 @@ Route::middleware('auth:api')->group(function() {
 
     //Route Logout
     Route::post('/logout', 'AuthController@logout');
+
+
 });

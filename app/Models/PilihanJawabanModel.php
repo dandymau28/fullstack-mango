@@ -11,6 +11,7 @@ class PilihanJawabanModel extends Model
 
     protected $table = 'pilihan_jawaban';
     protected $primaryKey = 'pilihan_jawaban_id';
+    protected $guarded = [];
 
     protected $fillable = [
         'soal_id',

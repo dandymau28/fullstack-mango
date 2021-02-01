@@ -11,6 +11,7 @@ class SoalModel extends Model
 
     protected $table = 'soal';
     protected $primaryKey = 'soal_id';
+    protected $guarded = [];
 
     protected $fillable = [
         'ujian_id',

@@ -46,7 +46,12 @@ class KomentarController extends Controller
             return response()->json([
                 'code' => 404,
                 'message' => 'Data tidak ditemukan'
-            ]);
+            ], 404);
+        } else if (!$request->get('komentar')) {
+            return response()->json([
+                'code' => 400,
+                'message' => 'Komentar tidak boleh kosong'
+            ], 400);
         }
 
         $komentar->user_id = Auth::user()->user_id;
@@ -59,12 +64,12 @@ class KomentarController extends Controller
                 'code' => 200,
                 'message' => 'Berhasil menambahkan komentar!',
                 'status' => $insert
-            ]);
+            ], 200);
         } else {
             return response()->json([
                 'code' => 400,
                 'message' => 'Gagal menambahkan komentar!'
-            ]);
+            ], 400);
         }
     }
 }

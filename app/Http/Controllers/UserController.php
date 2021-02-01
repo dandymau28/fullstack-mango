@@ -13,7 +13,8 @@ use DB;
 
 class UserController extends Controller
 {
-    public function showByIdUser ($user_id) {
+    public function showByIdUser () {
+        $user_id = auth()->user()->user_id;
         try {
             $data = DB::table('profil_user')
                     ->where('user_id', $user_id)
@@ -23,7 +24,7 @@ class UserController extends Controller
             return response()->json([
                 'code' => 500,
                 'message' => 'Internal Server Error. ErrMsg = '.$e->getMessage()
-            ]);
+            ], 500);
         }
 
         if (!$data->isEmpty()) {
@@ -36,21 +37,21 @@ class UserController extends Controller
             return response()->json([
                 'code' => 404,
                 'message' => 'Data tidak ditemukan'
-            ]);
+            ], 404);
         }
     }
 
-    public function updateByIdUser($user_id, Request $request) {
+    public function updateByIdUser(Request $request) {
         //Mengubah data profil
-        $profil = new Profil;
-
-        $user = $profil->where('user_id', $user_id)->first();
+        $user_id = auth()->user()->user_id;
+        $profil_user = new Profil;
+        $user = $profil_user->where('user_id', $user_id)->first();
 
         if (!$user) {
-            return response()->json([
-                'code' => 404,
-                'message' => 'Data tidak ditemukan'
-            ]);
+            $profil = new Profil;
+            $profil->user_id = $user_id;
+
+            $insert = $profil->save();
         }
 
         $data = [
@@ -59,7 +60,7 @@ class UserController extends Controller
             'nomor_hp' => $request->get('nomor_hp')
         ];
 
-        $update = $profil->where('user_id', $user_id)->update($data);
+        $update = Profil::where('user_id', $user_id)->update($data);
 
         if ($update) {
             return response()->json([

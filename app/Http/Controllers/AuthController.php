@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -20,69 +21,78 @@ class AuthController extends Controller
 
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                return response()->json(['message' => 'Username/Password salah!', 'code' => 400], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            return response()->json(['message' => 'Kesalahan server! Tidak dapat membuat token', 'code' => 500], 500);
         }
 
-        return response()->json(compact('token'));
+        return response()->json([
+            'message' => 'Berhasil login!',
+            'code' => 200,
+            'token' => $token
+        ], 200);
     }
 
     public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:8|confirmed'
-        ]);
+        $validator = Validator::make($request->all(),[
+                'username' => 'required|max:255|unique:users',
+                'email' => 'required|unique:users',
+                'password' => 'required|min:8',
+                'role' => 'required',
+            ]);
 
-        if($validator->fails()) {
-            return response()->json($validator->errors()->toJson(), 400);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->errors(),
+                'code' => '400'
+            ], 400);
+        } else {
+            $user = User::create([
+                'username' => $request->get('username'),
+                'email' => $request->get('email'),
+                'password' => Hash::make($request->get('password')),
+                'role' => $request->get('role')
+            ]);
+    
+            $token = JWTAuth::fromUser($user);
+            
+            return response()->json([
+                'message' => 'Berhasil membuat akun',
+                'code' => '200'
+            ], 200);
         }
-
-        $user = User::create([
-            'username' => $request->get('username'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password'))
-        ]);
-
-        $token = JWTAuth::fromUser($user);
-        
-        return response()->json(compact('user', 'token'), 201);
     }
 
     public function getAuthenticatedUser()
     {
         try {
-
             if (! $user = JWTAuth::parseToken()->authenticate()) {
                 return response()->json(['user_not_found'], 404);
             }
-
         } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-
-            return response()->json(['token_expired'], $e->getStatusCode());
-
+            return response()->json(['message' => 'Token Expired', 'code' => $e->getStatusCode()], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-
-            return response()->json(['token_invalid'], $e->getStatusCode());
-
+            return response()->json(['message' => 'Token Invalid', 'code' => $e->getStatusCode()], $e->getStatusCode());
         } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-
-            return response()->json(['token_absent'], $e->getStatusCode());
-
+            return response()->json(['message' => 'Token Absent', 'code' => $e->getStatusCode()], $e->getStatusCode());
         }
 
-        return response()->json(compact('user'));
+        return response()->json([
+            'message' => 'Berhasil mengambil data!',
+            'data' => $user,
+            'code' => 200
+        ], 200);
     }
 
-    public function verification($code) {
+    public function verification($user_id, $code) {
         $code = base64_decode($code);
         $email = explode('|', $code);
         try {
             DB::beginTransaction();
 
-            User::where('email', $email[1])
+            User::where('user_id', $user_id)
+                ->where('email', $email[1])
                 ->update([
                     'email_verified_at' => date('Y-m-d H:i:s')
                 ]);
