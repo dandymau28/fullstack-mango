@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\KomikModel as Komik;
 use App\Models\AlamatKomikModel as AlamatKomik;
 use DB;
@@ -87,6 +88,20 @@ class KomikController extends Controller
     }
 
     public function store(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'buku_id' => 'required',
+            'judul' => 'required',
+            'tingkat' => 'required',
+            'status' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
         $komik = new Komik;
 
         DB::beginTransaction();

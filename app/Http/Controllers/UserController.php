@@ -43,6 +43,19 @@ class UserController extends Controller
 
     public function updateByIdUser(Request $request) {
         //Mengubah data profil
+        $validator = Validator::make($request->all(),[
+            'kelas' => 'required',
+            'nama' => 'required|unique:users',
+            'nomor_hp' => 'numeric',
+        ]);
+
+        if($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
         $user_id = auth()->user()->user_id;
         $profil_user = new Profil;
         $user = $profil_user->where('user_id', $user_id)->first();

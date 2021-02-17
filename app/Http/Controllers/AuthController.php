@@ -88,6 +88,16 @@ class AuthController extends Controller
     public function verification($user_id, $code) {
         $code = base64_decode($code);
         $email = explode('|', $code);
+
+        $data_user = User::where('user_id', $user_id)->where('email', $email[1])->get();
+
+        if ($data_user->isEmpty()) {
+            return response()->json([
+                'code' => 404,
+                'message' => 'Data user tidak ditemukan!'
+            ], 404);
+        }
+
         try {
             DB::beginTransaction();
 
@@ -107,6 +117,7 @@ class AuthController extends Controller
 
         DB::commit();
 
+        
         return response()->json([
             'code' => 200,
             'message' => 'Berhasil verifikasi'

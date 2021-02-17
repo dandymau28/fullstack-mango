@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\BukuModel as Buku;
 use Auth;
 use DB;
@@ -34,6 +35,18 @@ class BukuController extends Controller
     }
 
     public function store(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'judul' => 'required',
+            'tingkat' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
         $buku = new Buku;
 
         DB::beginTransaction();

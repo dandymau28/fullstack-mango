@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\SoalModel as Soal;
+use Illuminate\Support\Facades\Validator;
 use App\Models\PilihanJawabanModel as PilihanJawaban;
 use DB;
 
@@ -37,8 +38,24 @@ class SoalController extends Controller
 
     public function store(Request $request) {
         
-        // return response()->json($request);
-        // $i = 0;
+        if (auth()->user()->role != 'guru') {
+            return response()->json([
+                'code' => 400,
+                'message' => 'Anda tidak memiliki hak untuk menggunakan endpoint ini'
+            ], 400);
+        }
+
+        $validator = Validator::make($request->all(),[
+            'soal' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
         DB::beginTransaction();
         try {
             foreach($request->get('soal') as $soal_input) {

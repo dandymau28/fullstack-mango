@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Models\UjianModel as Ujian;
 use App\Models\NilaiModel as Nilai;
 use DB;
@@ -36,6 +37,19 @@ class UjianController extends Controller
     }
 
     public function store(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'komik_id' => 'required',
+            'waktu_ujian' => 'required',
+            'durasi_ujian' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'code' => 400,
+                'message' => $validator->errors()
+            ], 400);
+        }
+
         $ujian = new Ujian;
 
         DB::beginTransaction();
