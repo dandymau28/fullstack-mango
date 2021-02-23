@@ -90,11 +90,13 @@
         <div class="col-4">
           <h3 class="">{{$komik[0]->buku->judul}}</h3>
         </div>
-        {{-- <div class="col-lg-2"> --}}
-          <!-- <div class="align-bottom">
-            <a href="pilihan-materi.html" class="btn btn-primary align-bottom">See More ></a>
-          </div> -->
-        {{-- </div> --}}
+        @if(count($komik) >= 6)
+        <div class="col-lg-2">
+          <div class="align-bottom">
+            <a href="/buku/{{$komik[0]->buku_id}}" class="btn btn-primary align-bottom">See More ></a>
+          </div>
+        </div>
+        @endif
       </div>
       <div class="row">
 
