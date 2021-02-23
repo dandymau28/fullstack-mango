@@ -26,7 +26,6 @@ class DashboardController extends Controller
         foreach($buku as $materi) {
             $komik[] = Komik::whereNull('deleted_at')
                     ->where('buku_id', $materi->buku_id)->get();
-            
         }
 
         return view('index')->with([

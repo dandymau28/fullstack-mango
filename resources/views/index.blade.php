@@ -79,11 +79,16 @@
   </div>
 
   <div class="container">
-    <!--Pilihan Materi 1-->
+    <!--Pilihan Materi-->
+
+    @foreach($komiks as $komik)
+    @if($komik->isEmpty()) 
+      @continue
+    @endif
     <div class="pilihan">
       <div class="row justify-content-between judul-pilihan">
         <div class="col-4">
-          <h3 class="">Pilihan Materi Kira-kira 1</h3>
+          <h3 class="">{{$komik[0]->buku->judul}}</h3>
         </div>
         {{-- <div class="col-lg-2"> --}}
           <!-- <div class="align-bottom">
@@ -93,16 +98,18 @@
       </div>
       <div class="row">
 
-      @for($i = 0; $i < 3; $i++)
+      @foreach($komik as $materi)
         <div class="col-sm-2">
           <div class="card">
-            <img src="{{asset('image/kk1_1.png')}}" class="card-img-top thumbnail-materi" style="object-fit: contain;" alt="..." />
+          <a href="/komik/{{$materi->komik_id}}">
+            <img src="{{asset($materi->sampul)}}" class="card-img-top thumbnail-materi" style="object-fit: contain;" alt="..." />
             <div class="card-body">
-              <p class="card-text">Perkenalan dengan bahasa Jepang</p>
+              <p class="card-text">{{$materi->judul}}</p>
             </div>
+          </a>
           </div>
         </div>
-      @endfor
+      @endforeach
 
         {{-- <div class="col-sm-3">
           <div class="card">
@@ -132,9 +139,10 @@
         </div> --}}
       </div>
     </div>
+    @endforeach
 
     <!--Materi ke-2-->
-    <div class="pilihan">
+    <!--<div class="pilihan">
       <div class="row justify-content-between judul-pilihan">
         <div class="col-4">
           <h3 class="">Pilihan Materi Kira-kira 2</h3>
@@ -203,19 +211,19 @@
           </a>
         </div> --}}
       </div>
-    </div>
+    </div>-->
 
     <!--Materi ke-3-->
-    <div class="pilihan">
+    <!--<div class="pilihan">
       <div class="row justify-content-between judul-pilihan">
         <div class="col-4">
           <h3 class="">Pilihan Materi Kira-kira 3</h3>
         </div>
         <div class="col-lg-2">
-          <!-- <div class="align-bottom">
+          <div class="align-bottom">
             <a href="pilihan-materi.html" class="btn btn-primary align-bottom">See More ></a>
           </div>
-        </div> -->
+        </div>
         </div>
         <div class="row">
         @for($i = 0; $i < 4; $i++)
@@ -256,5 +264,5 @@
           </div> --}}
         </div>
       </div>
-    </div>
+    </div>-->
 @endsection
