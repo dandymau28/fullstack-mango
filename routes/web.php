@@ -17,4 +17,8 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'WebController\DashboardController@index');
+Route::get('/', 'WebController\DashboardController@index')->name('index');
+
+Route::get('/komik', 'WebController\KomikController@show');
+
+// Route::get('/komik', 'WebController\KomikController@showKomik');

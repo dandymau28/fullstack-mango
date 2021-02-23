@@ -4,6 +4,10 @@ namespace App\Http\Controllers\WebController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\BukuModel as Buku;
+use App\Models\KomikModel as Komik;
+use App\Models\AlamatKomikModel as AlamatKomik;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -14,7 +18,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $buku = Buku::whereNull('deleted_at')
+                ->get();
+
+        return view('index')->with([
+            'bukus' => $buku
+        ]);
     }
 
     /**
