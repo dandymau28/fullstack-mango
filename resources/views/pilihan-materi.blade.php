@@ -12,7 +12,7 @@
     <div class="pilihan">
       <div class="row">
         @foreach($komiks as $komik)
-        <div class="col-sm-2">
+        <div class="col-sm-2 my-2">
           <a href="/komik/{{$komik->komik_id}}">
             <div class="card">
               <img src="{{asset($komik->sampul)}}" class="card-img-top thumbnail-materi" alt="..." />
