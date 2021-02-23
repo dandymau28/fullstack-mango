@@ -37,11 +37,11 @@
         @foreach($bukus as $buku)
         <div class="col-sm-3">
           <div class="card">
-            <a href="pilihan-materi.html">
-              <img src="{{asset('image/Kira-kira1.png')}}" class="card-img-top" alt="..." />
+            <a href="/buku/{{$buku->buku_id}}">
+              <img src="{{asset($buku->sampul)}}" class="card-img-top" alt="..." />
               <div class="card-body">
                 <p class="card-text">
-                  NIHONGO KIRA-KIRA 1
+                  {{$buku->judul}}
                 </p>
               </div>
             </a>
@@ -257,30 +257,4 @@
         </div>
       </div>
     </div>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="row justify-content-end text-center">
-          <div class="col">
-            <a href="" class="">About Us</a>
-          </div>
-
-          <div class="col">
-            <a href="" class="">Terms & Conditions</a>
-          </div>
-
-          <div class="col">
-            <a href="" class="">Privacy Policy</a>
-          </div>
-
-          <div class="col">
-            <a href="" class="">F.A.Q</a>
-          </div>
-
-          <div class="col">
-            <a href="" class="">Contact Us</a>
-          </div>
-        </div>
-      </div>
-    </footer>
 @endsection

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\WebController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\BukuModel as Buku;
+use App\Models\KomikModel as Komik;
+use App\Models\AlamatKomikModel as AlamatKomik;
+use DB;
 
 class BukuController extends Controller
 {
@@ -46,7 +50,13 @@ class BukuController extends Controller
      */
     public function show($id)
     {
-        //
+        $buku = Buku::whereNull('deleted_at')->where('buku_id', $id)->first();
+        $komik = Komik::whereNull('deleted_at')->where('buku_id', $id)->get();
+
+        return view('pilihan-materi')->with([
+            'judul' => $buku->judul,
+            'komiks' => $komik
+        ]);
     }
 
     /**

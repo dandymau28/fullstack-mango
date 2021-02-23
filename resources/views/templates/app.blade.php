@@ -3,4 +3,5 @@
 
 @yield('content')
 
+@include('templates.footer')
 @include('templates.foot')

@@ -18,11 +18,20 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $komik = [];
+
         $buku = Buku::whereNull('deleted_at')
-                ->get();
+                ->orderBy('buku_id', 'asc')->get();
+
+        foreach($buku as $materi) {
+            $komik[] = Komik::whereNull('deleted_at')
+                    ->where('buku_id', $materi->buku_id)->get();
+            
+        }
 
         return view('index')->with([
-            'bukus' => $buku
+            'bukus' => $buku,
+            'komiks' => $komik
         ]);
     }
 

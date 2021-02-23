@@ -21,4 +21,6 @@ Route::get('/', 'WebController\DashboardController@index')->name('index');
 
 Route::get('/komik', 'WebController\KomikController@show');
 
+Route::get('/buku/{id}','WebController\BukuController@show');
+
 // Route::get('/komik', 'WebController\KomikController@showKomik');
