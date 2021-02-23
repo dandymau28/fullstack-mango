@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WebController\DashboardController@index')->name('index');
 
-Route::get('/komik', 'WebController\KomikController@show');
+Route::get('/komik/{id}', 'WebController\KomikController@show');
 
 Route::get('/buku/{id}','WebController\BukuController@show');
 

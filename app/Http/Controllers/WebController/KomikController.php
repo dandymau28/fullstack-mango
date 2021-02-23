@@ -48,10 +48,8 @@ class KomikController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $id = $request->get('id');
-
         $dataKomik = Komik::whereNull('deleted_at')
                 ->where('komik_id', $id)
                 ->first();
