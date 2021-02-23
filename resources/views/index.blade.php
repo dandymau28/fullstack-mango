@@ -100,11 +100,7 @@
       </div>
       <div class="row">
 
-      {{$i = 0}}
       @foreach($komik as $materi)
-        @if($i == 6)
-        @break
-        @endif
         <div class="col-sm-2">
           <div class="card">
           <a href="/komik/{{$materi->komik_id}}">
@@ -115,7 +111,6 @@
           </a>
           </div>
         </div>
-        {{$i++}}
       @endforeach
 
         {{-- <div class="col-sm-3">
