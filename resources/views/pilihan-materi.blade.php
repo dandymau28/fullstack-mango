@@ -15,7 +15,7 @@
         <div class="col-sm-2">
           <a href="/komik/{{$komik->komik_id}}">
             <div class="card">
-              <img src="{{asset('image/kk2_13.png')}}" class="card-img-top thumbnail-materi" alt="..." />
+              <img src="{{asset($komik->sampul)}}" class="card-img-top thumbnail-materi" alt="..." />
               <div class="card-body">
                 <p class="card-text">{{$komik->judul}}</p>
               </div>
