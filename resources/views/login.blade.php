@@ -5,25 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mango</title>
+    <link rel="icon" href="{{asset('image/logo.png')}}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="asset/css/bootstrap.min.css" />
-    <!-- <link rel="stylesheet" href="asset/css/bootstrap-reboot.css">
-        <link rel="stylesheet" href="asset/css/bootstrap-grid.css"> -->
+    {{-- Bootstrap CSS --}}
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{assets('c')}}"> --}}
 
-    <!-- Own CSS -->
-    <link rel="stylesheet" href="asset/css/style.css" />
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style2.css')}}" />
 
-
-    <!--Font Awesome-->
-    <!-- <script src="https://kit.fontawesome.com/6b2ac3863a.js" crossorigin="anonymous"></script> -->
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <title>Manga Nihongo</title>
 </head>
 
@@ -33,13 +26,14 @@
             <div class="card col-sm-6">
                 <h5 class="card-header text-center">Login</h5>
                 <div class="card-body">
-                    <form>
+                    <form action="/login" method="post">
+                    @csrf
                         <div class="md-form">
-                            <input type="text" class="form-control" id="idUser" required>
-                            <label for="idUser">User ID</label>
+                            <input type="text" class="form-control" id="idUser" name="username" required>
+                            <label for="idUser">Username</label>
                         </div>
                         <div class="md-form">
-                            <input type="password" class="form-control" id="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required>
                             <label for="password">Password</label>
                         </div>
                         <div>

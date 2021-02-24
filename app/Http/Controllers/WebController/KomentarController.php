@@ -4,12 +4,10 @@ namespace App\Http\Controllers\WebController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\KomikModel as Komik;
-use App\Models\AlamatKomikModel as AlamatKomik;
+use App\Models\KomentarModel as Komentar;
 use DB;
 
-class KomikController extends Controller
+class KomentarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -39,7 +37,25 @@ class KomikController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $komentar = new Komentar;
+
+        DB::beginTransaction();
+        try {
+            $komentar->user_id = auth()->user()->user_id;
+            $komentar->komik_id = $request->input('komik_id');
+            $komentar->isi_komentar = $request->input('komentar');
+            $komentar->save();
+        } catch (Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'status' => 'Gagal memasukkan komentar. ErrMsg: '.$e->getMessage()
+            ]);
+        }
+        DB::commit();
+
+        return back()->with([
+            'status' => 'Berhasil komentar!'
+        ]);
     }
 
     /**
@@ -50,27 +66,7 @@ class KomikController extends Controller
      */
     public function show($id)
     {
-        $dataKomik = Komik::whereNull('deleted_at')
-                ->where('komik_id', $id)
-                ->first();
-
-        $alamatKomik = AlamatKomik::whereNull('deleted_at')
-                    ->where('komik_id', $id)
-                    ->get();
-
-        $komentar = DB::table('komentar')
-                    ->join('users', 'komentar.user_id', '=', 'users.user_id')
-                    ->join('profil_user', 'profil_user.user_id', '=', 'users.user_id')
-                    ->whereNull('komentar.deleted_at')
-                    ->where('komentar.komik_id', $id)->select('profil_user.nama', 'profil_user.foto_profil', 'komentar.isi_komentar')
-                    ->orderBy('komentar.created_at', 'desc')
-                    ->get();
-
-        return view('komik')->with([
-            'alamatKomik' => $alamatKomik,
-            'dataKomik' => $dataKomik,
-            'komentars' => $komentar
-        ]);
+        //
     }
 
     /**

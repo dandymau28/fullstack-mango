@@ -17,10 +17,20 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', 'WebController\DashboardController@index')->name('index');
+Route::get('/login', 'WebController\AuthController@view')->name('login');
+Route::post('/login', 'WebController\AuthController@login')->name('login-post');
 
-Route::get('/komik/{id}', 'WebController\KomikController@show');
+Route::group([
+    'middleware' => 'auth.basic'
+], function($router) {
+    Route::get('/', 'WebController\DashboardController@index')->name('index');
+    
+    Route::get('/komik/{id}', 'WebController\KomikController@show');
+    
+    Route::get('/buku/{id}','WebController\BukuController@show');
+    
+    Route::post('/komentar', 'WebController\KomentarController@store');
+});
 
-Route::get('/buku/{id}','WebController\BukuController@show');
 
 // Route::get('/komik', 'WebController\KomikController@showKomik');

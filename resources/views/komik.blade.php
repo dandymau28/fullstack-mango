@@ -28,13 +28,6 @@
           <img src="{{asset($alamat->alamat)}}" class="img-fluid" alt="">
         </a>
       @endforeach
-      <div style="background-color: white; height: 5em; display: block; width: 43.75em;">
-        <div class="container">
-          <a href="latihan.html" class="btn btn-primary btn-lg btn-block">
-            <h2>Yuk Latihan</h2>
-          </a>
-        </div>
-      </div>
 
       <!-- materi -->
       <!-- Modal -->
@@ -75,6 +68,55 @@
           </div>
         </div>
       </div>
+    </div>
+    
+  </div>
+  <div style="background-color: white; height: 5em; display: block; width: 60%; padding-top: 1em; margin: 0 auto;">
+    <div class="container">
+      <a href="latihan.html" class="btn btn-primary btn-lg btn-block">
+        <h2>Yuk Latihan</h2>
+        {{session('status')}}
+      </a>
+    </div>
+  </div>
+
+  <div class="container komentar" style="margin-top: 3em;">
+    <div class="margin-komentar">
+      <form method="post" action="/komentar">
+      @csrf
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1" style="font-weight: bold;">Komentar</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="hidden" value="{{$alamatKomik[0]->komik_id}}" name="komik_id">
+          <input type="submit" class="btn btn-success" value="Kirim" style="float: right;">
+        </div>
+      </form>
+    </div>
+
+    <div class="komentar-section">
+    @foreach($komentars as $komentar)
+      <div class="single-komentar">
+        <div class="row">
+          <div class="col-sm-1">
+              <div class="foto-komentar">
+                <img src="{{asset($komentar->foto_profil)}}" class="foto-komentar" style="object-fit: contain;">
+              </div>
+          </div>
+          <div class="col">
+            <div class="isi-komentar">
+              <div class="nama-profil-komentar">
+                <span>{{$komentar->nama}}</span>
+              </div>
+              <div class="isi-komentar">
+                <span>{{$komentar->isi_komentar}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    @endforeach
     </div>
   </div>
 @endsection

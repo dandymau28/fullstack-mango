@@ -3,7 +3,8 @@ body {
 }
 
 .bg-comic {
-    background-color: #D6D6D6;
+    /* background-color: #D6D6D6; */
+    background-color: white;
 }
 
 .bg-login {
@@ -130,6 +131,39 @@ body {
 
 .bg-pilihan {
     background-color: #313F49fb;
+}
+
+.komentar {
+    background-color: white;
+    display: block;
+}
+
+.komentar-section {
+    padding: 10px 10px;
+    border: 2px solid #D6D6D6;
+}
+
+.margin-komentar {
+    margin-bottom: 5em;
+}
+
+.foto-komentar {
+    height: 50px;
+    width: 50px;
+    border-radius: 500px;
+}
+
+.nama-profil-komentar {
+    font-weight: bold;
+}
+
+.isi-komentar {
+    margin-left: -10px;
+}
+
+.single-komentar {
+    padding: 15px;
+    border: 1px solid #D6D6D6;
 }
 
 @media (max-width: 768px) {
