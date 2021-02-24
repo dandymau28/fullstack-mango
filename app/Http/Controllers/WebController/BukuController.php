@@ -51,7 +51,7 @@ class BukuController extends Controller
     public function show($id)
     {
         $buku = Buku::whereNull('deleted_at')->where('buku_id', $id)->first();
-        $komik = Komik::whereNull('deleted_at')->where('buku_id', $id)->get();
+        $komik = Komik::whereNull('deleted_at')->where('buku_id', $id)->where('status', 'terbit')->get();
 
         return view('pilihan-materi')->with([
             'judul' => $buku->judul,
