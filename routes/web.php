@@ -21,7 +21,7 @@ Route::get('/login', 'WebController\AuthController@view')->name('login');
 Route::post('/login', 'WebController\AuthController@login')->name('login-post');
 
 Route::group([
-    'middleware' => 'auth.basic'
+    'middleware' => 'auth'
 ], function($router) {
     Route::get('/', 'WebController\DashboardController@index')->name('index');
     
@@ -30,6 +30,8 @@ Route::group([
     Route::get('/buku/{id}','WebController\BukuController@show');
     
     Route::post('/komentar', 'WebController\KomentarController@store');
+
+    Route::get('/logout', 'WebController\AuthController@logout');
 });
 
 
