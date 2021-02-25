@@ -39,7 +39,7 @@ class UjianController extends Controller
     public function store(Request $request, $id)
     {
         $nilai = 0;
-        $ujian = Ujian::find($id);
+        $ujian = Ujian::whereNull('deleted_at')->where('komik_id', $id)->first();
 
         foreach($ujian->soal as $soal) {
             if ($soal->jawaban_benar == $request->input($soal->soal_id)) {
