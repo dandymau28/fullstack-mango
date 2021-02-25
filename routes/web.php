@@ -31,6 +31,9 @@ Route::group([
     
     Route::post('/komentar', 'WebController\KomentarController@store');
 
+    Route::get('/latihan/{id}', 'WebController\UjianController@show');
+    Route::post('/latihan/{id}', 'WebController\UjianController@store');
+
     Route::get('/logout', 'WebController\AuthController@logout');
 });
 

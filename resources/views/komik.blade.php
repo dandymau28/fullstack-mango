@@ -73,7 +73,7 @@
   </div>
   <div style="background-color: white; height: 5em; display: block; width: 60%; padding-top: 1em; margin: 0 auto;">
     <div class="container">
-      <a href="latihan.html" class="btn btn-primary btn-lg btn-block">
+      <a href="/latihan/{{$alamatKomik[0]->komik_id}}" class="btn btn-primary btn-lg btn-block">
         <h2>Yuk Latihan</h2>
         {{session('status')}}
       </a>
