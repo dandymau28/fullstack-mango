@@ -40,7 +40,7 @@ class NilaiController extends Controller
                         ->join('ujian', 'ujian.ujian_id', '=', 'nilai.ujian_id')
                         ->join('komik', 'komik.komik_id', '=', 'ujian.komik_id')
                         ->whereNull('nilai.deleted_at')
-                        ->select(DB::raw('sum(nilai.nilai_angka) as nilai, profil_user.nama, komik.judul'))
+                        ->select(DB::raw('profil_user.user_id, sum(nilai.nilai_angka) as nilai, profil_user.nama, komik.judul'))
                         ->groupBy('nilai.user_id')
                         ->orderBy('nilai', 'desc')
                         ->get();
