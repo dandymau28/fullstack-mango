@@ -58,7 +58,7 @@ class UjianController extends Controller
      */
     public function show($id)
     {
-        $ujian = Ujian::find($id);
+        $ujian = Ujian::whereNull('deleted_at')->where('komik_id', $id)->first();
 
         $jumlahSoal = count($ujian->soal);
 
