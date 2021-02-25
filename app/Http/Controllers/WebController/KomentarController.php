@@ -48,13 +48,13 @@ class KomentarController extends Controller
         } catch (Exception $e) {
             DB::rollback();
             return back()->with([
-                'status' => 'Gagal memasukkan komentar. ErrMsg: '.$e->getMessage()
+                'error' => 'Gagal memasukkan komentar. ErrMsg: '.$e->getMessage()
             ]);
         }
         DB::commit();
 
         return back()->with([
-            'status' => 'Berhasil komentar!'
+            'success' => 'Berhasil komentar!'
         ]);
     }
 

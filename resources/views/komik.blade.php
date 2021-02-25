@@ -106,8 +106,13 @@
           </div>
           <div class="col">
             <div class="isi-komentar">
-              <div class="nama-profil-komentar">
-                <span>{{$komentar->nama}}</span>
+              <div class="row justify-content-between">
+                <div class="nama-profil-komentar">
+                  <span>{{$komentar->nama}}</span>
+                </div>
+                <div class="">
+                  </span>{{$komentar->created_at}}</span>
+                </div>
               </div>
               <div class="isi-komentar">
                 <span>{{$komentar->isi_komentar}}</span>

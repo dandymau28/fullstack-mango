@@ -23,7 +23,7 @@ class UserUjianStatusModel extends Model
         'deleted_at'
     ];
 
-    protected $incrementing = false;
+    public $incrementing = false;
 
     public function user() {
         return $this->belongsTo('App\User', 'user_id', 'user_id');

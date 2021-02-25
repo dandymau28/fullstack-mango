@@ -166,6 +166,19 @@ body {
     border: 1px solid #D6D6D6;
 }
 
+/* .footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+    bottom: 0;
+} */
+
+footer {
+    clear: both;
+    position: relative;
+    margin-top: -200px;
+}
+
 @media (max-width: 768px) {
     .jawaban {
         margin-right: 5em;

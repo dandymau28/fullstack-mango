@@ -34,6 +34,10 @@ Route::group([
     Route::get('/latihan/{id}', 'WebController\UjianController@show');
     Route::post('/latihan/{id}', 'WebController\UjianController@store');
 
+    Route::get('/leaderboard', 'WebController\NilaiController@index');
+
+    Route::get('/profil/{id}', 'WebController\ProfilUserController@show');
+
     Route::get('/logout', 'WebController\AuthController@logout');
 });
 

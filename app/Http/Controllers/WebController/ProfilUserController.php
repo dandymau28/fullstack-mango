@@ -4,12 +4,10 @@ namespace App\Http\Controllers\WebController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use App\Models\KomikModel as Komik;
-use App\Models\AlamatKomikModel as AlamatKomik;
+use App\Models\ProfilUserModel as Profil;
 use DB;
 
-class KomikController extends Controller
+class ProfilUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -50,26 +48,10 @@ class KomikController extends Controller
      */
     public function show($id)
     {
-        $dataKomik = Komik::whereNull('deleted_at')
-                ->where('komik_id', $id)
-                ->first();
+        $profil = Profil::whereNull('deleted_at')->where('user_id', $id)->first();
 
-        $alamatKomik = AlamatKomik::whereNull('deleted_at')
-                    ->where('komik_id', $id)
-                    ->get();
-
-        $komentar = DB::table('komentar')
-                    ->join('users', 'komentar.user_id', '=', 'users.user_id')
-                    ->join('profil_user', 'profil_user.user_id', '=', 'users.user_id')
-                    ->whereNull('komentar.deleted_at')
-                    ->where('komentar.komik_id', $id)->select('profil_user.nama', 'profil_user.foto_profil', 'komentar.isi_komentar', 'komentar.created_at')
-                    ->orderBy('komentar.created_at', 'desc')
-                    ->get();
-
-        return view('komik')->with([
-            'alamatKomik' => $alamatKomik,
-            'dataKomik' => $dataKomik,
-            'komentars' => $komentar
+        return view('profil')->with([
+            'profil' => $profil
         ]);
     }
 
