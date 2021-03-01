@@ -81,7 +81,7 @@
                         </form>
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                        <button type="button" class="btn btn-danger btn-lg btn-block">Logout</button>
+                        <a href="/logout" class="btn btn-danger btn-lg btn-block">Logout</a>
                     </div>
                 </div>
             </div>
