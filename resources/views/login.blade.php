@@ -39,6 +39,9 @@
                         <div>
                             <button type="submit" class="btn btn-primary" id="login">login</button>
                         </div>
+                        <div>
+                            <a href="/register" class="btn btn-warning">Daftarkan Akun</a>
+                        </div>
                     </form>
                 </div>
             </div>
