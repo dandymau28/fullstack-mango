@@ -5,57 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mango</title>
+    <link rel="icon" href="{{asset('image/logo.png')}}">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="asset/css/bootstrap.min.css" />
-    <!-- <link rel="stylesheet" href="asset/css/bootstrap-reboot.css">
-        <link rel="stylesheet" href="asset/css/bootstrap-grid.css"> -->
+    {{-- Bootstrap CSS --}}
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{assets('c')}}"> --}}
 
-    <!-- Own CSS -->
-    <link rel="stylesheet" href="asset/css/style.css" />
+    {{-- Custom CSS --}}
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style2.css')}}" />
 
-
-    <!--Font Awesome-->
-    <!-- <script src="https://kit.fontawesome.com/6b2ac3863a.js" crossorigin="anonymous"></script> -->
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- Material Design Bootstrap -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
     <title>Manga Nihongo</title>
 </head>
 
 <body class="bg-login">
     <div class="container">
+    @if(session('error'))
+        @foreach(session('error')->messages() as $key => $value)
+        @foreach($value as $message)
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="position: absolute; z-index: 1;">
+            {{$message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @endforeach
+        @endforeach
+    @endif
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
         <div class="row justify-content-md-center ma-9">
             <div class="card col-sm-6">
                 <h5 class="card-header text-center">Register</h5>
                 <div class="card-body">
-                    <form>
+                    <form method="post" action="/register">
+                    @csrf
                         <div class="md-form">
-                            <input type="text" class="form-control" id="idUser" required>
+                            <input type="text" class="form-control" id="idUser" name="nama" required>
                             <label for="idUser">Nama Lengkap</label>
                         </div>
+                        <div class="md-form">
+                            <input type="text" class="form-control" id="username" name="username" required>
+                            <label for="username">Username</label>
+                        </div>
                         <div class="">
-                            <select class="browser-default custom-select">
+                            <select class="browser-default custom-select" name="kelas">
                                 <option value="" disabled selected>Pilih kelasmu</option>
-                                <option value="1">X</option>
-                                <option value="2">XI</option>
-                                <option value="3">XII</option>
+                                <option value="10">X</option>
+                                <option value="11">XI</option>
+                                <option value="12">XII</option>
                             </select>
                         </div>
                         <div class="md-form">
-                            <input type="email" class="form-control" id="email" required>
+                            <input type="email" class="form-control" id="email" name="email" required>
                             <label for="email">Alamat Email</label>
                         </div>
                         <div class="md-form">
-                            <input type="password" class="form-control" id="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required>
                             <label for="password">Password</label>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary" id="register">Register</button>
+                            <input type="hidden" class="btn btn-primary" id="register" name="role" value="siswa">
+                            <input type="submit" class="btn btn-primary" id="register" value="Register">
                         </div>
                     </form>
                 </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\KomikModel as Komik;
 use App\Models\AlamatKomikModel as AlamatKomik;
+use App\Models\MateriModel as Materi;
 use DB;
 
 class KomikController extends Controller
@@ -66,10 +67,15 @@ class KomikController extends Controller
                     ->orderBy('komentar.created_at', 'desc')
                     ->get();
 
+        $materis = Materi::whereNull('deleted_at')
+                ->where('komik_id', $id)
+                ->get();
+
         return view('komik')->with([
             'alamatKomik' => $alamatKomik,
             'dataKomik' => $dataKomik,
-            'komentars' => $komentar
+            'komentars' => $komentar,
+            'materis' => $materis
         ]);
     }
 

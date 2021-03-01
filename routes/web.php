@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', 'WebController\AuthController@view')->name('login');
 Route::post('/login', 'WebController\AuthController@login')->name('login-post');
+Route::get('/register', 'WebController\AuthController@register_view');
+Route::post('/register', 'WebController\AuthController@register')->name('register');
 
 Route::group([
     'middleware' => 'auth'
@@ -36,7 +38,8 @@ Route::group([
 
     Route::get('/leaderboard', 'WebController\NilaiController@index');
 
-    Route::get('/profil/{id}', 'WebController\ProfilUserController@show');
+    Route::get('/profil', 'WebController\ProfilUserController@show');
+    Route::post('/profil', 'WebController\ProfilUserController@update');
 
     Route::get('/logout', 'WebController\AuthController@logout');
 });

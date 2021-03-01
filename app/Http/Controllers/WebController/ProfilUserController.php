@@ -46,8 +46,10 @@ class ProfilUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
+        $id = auth()->user()->user_id;
+
         $profil = Profil::whereNull('deleted_at')->where('user_id', $id)->first();
 
         return view('profil')->with([
