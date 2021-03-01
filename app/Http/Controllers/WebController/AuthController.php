@@ -30,11 +30,19 @@ class AuthController extends Controller
     }
 
     public function view() {
-        return view('login');
+        if (Auth::check()) {
+            return redirect()->intended('/');
+        } else {
+            return view('login');
+        }
     }
 
     public function register_view() {
-        return view('register');
+        if (Auth::check()) {
+            return redirect()->intended('/');
+        } else {
+            return view('register');
+        }
     }
 
     public function register(Request $request) {
