@@ -44,5 +44,6 @@ Route::group([
     Route::get('/logout', 'WebController\AuthController@logout');
 });
 
-
+Route::get('/admin-page','AdminController\DashboardController@index');
+Route::get('/admin-page/buku','AdminController\BukuController@index')->name('admin-buku');
 // Route::get('/komik', 'WebController\KomikController@showKomik');
