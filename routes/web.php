@@ -45,5 +45,9 @@ Route::group([
 });
 
 Route::get('/admin-page','AdminController\DashboardController@index');
+// Route::resource('/datatables', 'AdminController\BukuController')->only([
+//     'dataBuku'
+// ]);
 Route::get('/admin-page/buku','AdminController\BukuController@index')->name('admin-buku');
+// Route::get('/data-buku','AdminController\BukuController@dataBuku')->name('data-buku');
 // Route::get('/komik', 'WebController\KomikController@showKomik');
