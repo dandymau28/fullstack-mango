@@ -44,7 +44,9 @@ Route::group([
     Route::get('/logout', 'WebController\AuthController@logout');
 });
 
-Route::prefix('/admin-page')->group(function() {
+Route::prefix('/admin-page')->group([
+    'middleware' => 'auth'
+], function() {
     Route::get('/','AdminController\DashboardController@index');
     Route::get('/buku','AdminController\BukuController@index')->name('admin-buku');
     Route::post('/buku', 'AdminController\BukuController@store')->name('store-buku');
