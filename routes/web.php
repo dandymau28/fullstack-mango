@@ -44,10 +44,16 @@ Route::group([
     Route::get('/logout', 'WebController\AuthController@logout');
 });
 
-Route::get('/admin-page','AdminController\DashboardController@index');
+Route::prefix('/admin-page')->group(function() {
+    Route::get('/','AdminController\DashboardController@index');
+    Route::get('/buku','AdminController\BukuController@index')->name('admin-buku');
+    Route::post('/buku', 'AdminController\BukuController@store')->name('store-buku');
+    Route::get('/buku/{id}', 'AdminController\BukuController@edit');
+    Route::post('/buku/{id}', 'AdminController\BukuController@update');
+    Route::get('/buku/{id}/delete', 'AdminController\BukuController@destroy');
+});
 // Route::resource('/datatables', 'AdminController\BukuController')->only([
 //     'dataBuku'
 // ]);
-Route::get('/admin-page/buku','AdminController\BukuController@index')->name('admin-buku');
 // Route::get('/data-buku','AdminController\BukuController@dataBuku')->name('data-buku');
 // Route::get('/komik', 'WebController\KomikController@showKomik');

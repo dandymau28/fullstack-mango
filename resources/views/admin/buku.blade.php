@@ -19,7 +19,7 @@
                         <table id="data-buku" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="10px">No</th>
                                     <th>Judul</th>
                                     <th>Kelas</th>
                                     <th>Sampul</th>
@@ -30,7 +30,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="10px">No</th>
                                     <th>Judul</th>
                                     <th>Kelas</th>
                                     <th>Sampul</th>
@@ -51,7 +51,8 @@
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
-                    <form role="form" method="post" action="{{route('admin-buku')}}">
+                    <form role="form" method="post" action="{{route('store-buku')}}" enctype="multipart/form-data">
+                    @csrf
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="JudulBuku">Judul Buku</label>
@@ -93,8 +94,30 @@
 
 @push('js')
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
+    function deleteUrl(id) {
+        Swal.fire({
+            title: 'Yakin dihapus?',
+            text: "Data yang terhapus tidak dapat dikembalikan",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+                )
+                window.location = 'http://127.0.0.1:8000/admin-page/buku/' + id + '/delete';
+            }
+        })
+    }
+
     $(document).ready(function () {
         bsCustomFileInput.init();
     });
@@ -113,6 +136,5 @@
             ]
         })
     })
-
 </script>
 @endpush
