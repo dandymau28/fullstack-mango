@@ -28,17 +28,18 @@
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="list-home" role="tabpanel"
                         aria-labelledby="list-home-list">
-                        <form method="post" action="/profil/{{$profil->user_id}}">
+                        <form method="post" action="/profil">
+                        @csrf
                             <div class="md-form">
                                 {{-- <label for="inputNama">Nama</label> --}}
-                                <input type="text" class="form-control" id="inputNama" value="{{$profil->nama}}">
+                                <input type="text" class="form-control" id="inputNama" value="{{(isset($profil->nama) ? $profil->nama : '')}}" placeholder="Masukan nama kalian" name="nama">
                             </div>
                             <div class="md-form">
                                 {{-- <label for="inputEmail">Email</label> --}}
-                                <input type="email" class="form-control" id="inputEmail" value="{{$profil->user->email}}">
+                                <input type="email" class="form-control" id="inputEmail" value="{{(isset($profil->user->email) ? $profil->user->email : '')}}" placeholder="Masukan kelas kalian. Contoh: 10/11/12" name="email">
                             </div>
                             <div class="md-form">
-                                <input type="text" class="form-control" id="inputNomorHP" value="{{$profil->nomor_hp}}">
+                                <input type="text" class="form-control" id="inputNomorHP" value="{{(isset($profil->nomor_hp) ? $profil->nomor_hp : '')}}" placeholder="Masukan nomor hp kalian. Contoh: 081234567890" name="nomor_hp">
                                 {{-- <label for="inputNomorHP" class="">Nomor HP</label> --}}
                             </div>
                             <button type="submit" class="btn peach-gradient btn-lg btn-block">Simpan</button>
