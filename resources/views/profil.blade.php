@@ -36,7 +36,7 @@
                             </div>
                             <div class="md-form">
                                 {{-- <label for="inputEmail">Email</label> --}}
-                                <input type="email" class="form-control" id="inputEmail" value="{{(isset($profil->user->email) ? $profil->user->email : '')}}" placeholder="Masukan kelas kalian. Contoh: 10/11/12" name="email">
+                                <input type="email" class="form-control" id="inputEmail" value="{{(isset($profil->user->email) ? $profil->user->email : '')}}" placeholder="Masukan email kalian. Contoh: fulan@gmail.com" name="email">
                             </div>
                             <div class="md-form">
                                 <input type="text" class="form-control" id="inputNomorHP" value="{{(isset($profil->nomor_hp) ? $profil->nomor_hp : '')}}" placeholder="Masukan nomor hp kalian. Contoh: 081234567890" name="nomor_hp">
