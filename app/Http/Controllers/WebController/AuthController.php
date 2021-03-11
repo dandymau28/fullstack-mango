@@ -17,7 +17,7 @@ class AuthController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            // dd(Auth::user()->role);
+            dd(Auth::user()->role);
             if (Auth::user()->role === 'guru') {
                 return redirect()->intended('/admin-page');
             } else if (Auth::user()->role === 'siswa') {
@@ -25,7 +25,9 @@ class AuthController extends Controller
             }
         }
 
-        return redirect('login');
+        return redirect('login')->with([
+            'error' => 'Username/Password salah'
+        ]);
     }
 
     public function logout() {
