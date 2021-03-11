@@ -54,6 +54,13 @@ Route::group([
     Route::get('/buku/{id}', 'AdminController\BukuController@edit');
     Route::post('/buku/{id}', 'AdminController\BukuController@update');
     Route::get('/buku/{id}/delete', 'AdminController\BukuController@destroy');
+
+    Route::get('/komik', 'AdminController\KomikController@index')->name('admin-komik');
+    Route::get('/komik/add', 'AdminController\KomikController@create')->name('tambah-komik');
+    Route::post('/komik', 'AdminController\KomikController@store');
+    Route::get('/komik/{id}', 'AdminController\KomikController@edit')->name('edit-komik');
+    Route::post('/komik/{id}', 'AdminController\KomikController@update');
+    Route::get('/komik/{id}/delete', 'AdminController\KomikController@destroy')->name('delete-komik');
 });
 // Route::resource('/datatables', 'AdminController\BukuController')->only([
 //     'dataBuku'

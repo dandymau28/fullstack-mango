@@ -26,4 +26,8 @@ class AlamatKomikModel extends Model
     public function komik() {
         return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id');
     }
+
+    public function materi() {
+        return $this->hasOne('App\Models\MateriModel', 'alamat_komik_id', 'alamat_komik_id');
+    }
 }

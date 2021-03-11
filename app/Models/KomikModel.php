@@ -16,7 +16,8 @@ class KomikModel extends Model
         'buku_id',
         'judul',
         'tingkat',
-        'status'
+        'status',
+        'sampul'
     ];
 
     protected $dates = [

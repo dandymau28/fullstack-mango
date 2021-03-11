@@ -15,7 +15,8 @@ class MateriModel extends Model
     protected $fillable = [
         'komik_id',
         'judul',
-        'isi'
+        'isi',
+        'alamat_komik_id'
     ];
 
     protected $dates = [
@@ -26,5 +27,9 @@ class MateriModel extends Model
 
     public function komik() {
         return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id');
+    }
+
+    public function alamat_komik() {
+        return $this->belongsTo('App\Models\AlamatKomikModel', 'alamat_komik_id', 'alamat_komik_id');
     }
 }
