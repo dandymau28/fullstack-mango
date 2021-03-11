@@ -5,6 +5,7 @@ namespace App\Http\Controllers\WebController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ProfilUserModel as Profil;
+use App\User;
 use DB;
 
 class ProfilUserController extends Controller
@@ -75,9 +76,32 @@ class ProfilUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $update_profil = Profil::where('user_id', auth()->user()->user_id)
+                        ->update([
+                            'nama' => $request->nama,
+                            'nomor_hp' => $request->nomor_hp
+                        ]);
+
+            $update_email = User::where('user_id', auth()->user()->user_id)
+                            ->update([
+                                'email' => $request->email
+                            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'error' => 'Gagal update profil. ErrMsg: ' . $e->getMessage()
+            ]);
+        }
+        DB::commit();
+
+        return back()->with([
+            'success' => 'Berhasil update profil'
+        ]);
     }
 
     /**
