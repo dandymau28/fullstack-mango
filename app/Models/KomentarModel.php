@@ -25,10 +25,10 @@ class KomentarModel extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\User', 'user_id', 'user_id');
+        return $this->belongsTo('App\User', 'user_id', 'user_id')->withTrashed();
     }
 
     public function komik() {
-        return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id');
+        return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id')->withTrashed();
     }
 }

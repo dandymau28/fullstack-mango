@@ -39,7 +39,7 @@ class KomikModel extends Model
     }
 
     public function buku() {
-        return $this->belongsTo('App\Models\BukuModel', 'buku_id', 'buku_id');
+        return $this->belongsTo('App\Models\BukuModel', 'buku_id', 'buku_id')->withTrashed();
     }
 
     public function komentar() {

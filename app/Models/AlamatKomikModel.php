@@ -24,7 +24,7 @@ class AlamatKomikModel extends Model
     ];
 
     public function komik() {
-        return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id');
+        return $this->belongsTo('App\Models\KomikModel', 'komik_id', 'komik_id')->withTrashed();
     }
 
     public function materi() {

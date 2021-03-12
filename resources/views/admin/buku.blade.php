@@ -113,7 +113,7 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location = 'http://127.0.0.1:8000/admin-page/buku/' + id + '/delete';
+                window.location = 'buku/' + id + '/delete';
             }
         })
     }

@@ -61,7 +61,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
-    /*function deleteUrl(id) {
+    function deleteUrl(id) {
         Swal.fire({
             title: 'Yakin dihapus?',
             text: "Data yang terhapus tidak dapat dikembalikan",
@@ -77,10 +77,10 @@
                 'Your file has been deleted.',
                 'success'
                 )
-                window.location = 'http://127.0.0.1:8000/admin-page/buku/' + id + '/delete';
+                window.location = 'komik/' + id + '/delete';
             }
         })
-    }*/
+    }
 
     $(document).ready(function () {
         bsCustomFileInput.init();

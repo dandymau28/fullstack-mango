@@ -35,7 +35,7 @@ class KomikController extends Controller
                         }
                     })
                     ->addColumn('action', function($data){ 
-                        $btn = '<a href="buku/' . $data->buku_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->buku_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
+                        $btn = '<a href="komik/' . $data->komik_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->komik_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
     
                         return $btn;
                     })
@@ -164,6 +164,22 @@ class KomikController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $hapus_materi = Materi::where('komik_id', $id)->delete();
+            $hapus_alamatkomik = Alamat::where('komik_id', $id)->delete();
+            $hapus_komik = Komik::where('komik_id', $id)->delete();
+        } catch (Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'error' => 'Gagal hapus komik. ErrMsg: ' . $e->getMessage()
+            ]);
+        }
+        DB::commit();
+
+        return back()->with([
+            'success' => 'Berhasil hapus komik'
+        ]);
     }
 }
