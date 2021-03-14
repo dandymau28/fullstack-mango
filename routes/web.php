@@ -61,6 +61,13 @@ Route::group([
     Route::get('/komik/{id}', 'AdminController\KomikController@edit')->name('edit-komik');
     Route::post('/komik/{id}', 'AdminController\KomikController@update');
     Route::get('/komik/{id}/delete', 'AdminController\KomikController@destroy')->name('delete-komik');
+
+    Route::get('/ujian', 'AdminController\UjianController@index')->name('admin-ujian');
+    Route::get('/ujian/add', 'AdminController\UjianController@create')->name('tambah-ujian');
+    Route::post('/ujian', 'AdminController\UjianController@store');
+    Route::get('/ujian/{id}', 'AdminController\UjianController@edit')->name('edit-komik');
+    Route::post('/ujian/{id}', 'AdminController\UjianController@update');
+    Route::get('/ujian/{id}/delete', 'AdminController\UjianController@destroy')->name('delete-komik');
 });
 // Route::resource('/datatables', 'AdminController\BukuController')->only([
 //     'dataBuku'

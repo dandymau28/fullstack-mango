@@ -24,8 +24,8 @@
       </a> --}}
 
       @foreach ($alamatKomik as $alamat)
-        <a href="" class="" data-toggle="modal" data-target="#panel-{{$alamat->alamat_komik_id}}">
-          <img src="{{asset($alamat->alamat)}}" class="img-fluid" alt="">
+        <a href="" class="d-flex" data-toggle="modal" data-target="#panel-{{$alamat->alamat_komik_id}}" style="min-width: 80%">
+          <img src="{{asset($alamat->alamat)}}" class="img-fluid" alt="" style="margin-left: auto; margin-right: auto;">
         </a>
       @endforeach
 
@@ -43,7 +43,7 @@
                 </button>
               </div>
               <div class="modal-body">
-                <p>{{$materi->isi}}</p>
+                {!! $materi->isi !!}
                 {{-- <table class="table">
                   <thead>
                     <tr>

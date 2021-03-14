@@ -141,7 +141,16 @@ class KomikController extends Controller
      */
     public function edit($id)
     {
-        //
+        $komik = Komik::find($id);
+        $alamat = $komik->alamat()->get();
+        $daftar_buku = Buku::all();
+
+        return view('admin.edit-komik')->with([
+            'komik' => $komik,
+            'alamat' => $alamat,
+            'count' => count($alamat),
+            'daftar_buku' => $daftar_buku
+        ]);
     }
 
     /**
@@ -153,7 +162,87 @@ class KomikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $komik_id = $id;
+        DB::beginTransaction();
+
+        try {
+            $dataKomik = [
+                'buku_id' => $request->input('buku'),
+                'judul' => $request->input('judul'),
+                'tingkat' => $request->input('tingkat'),
+            ];
+    
+            if ($request->hasFile('sampul')) {
+                $file_name = 'sampul-komik-' . str_replace(' ', '-', $request->input('judul')) . '.' . $request->sampul->extension();
+                $path = 'storage/' . $file_name;
+                $upload = $request->sampul->storeAs('public', $file_name);
+                $dataKomik['sampul'] = $path;
+            }
+    
+            $insertKomik = Komik::where('komik_id', $komik_id)
+                        ->update($dataKomik);
+    
+            if (isset($request->komik)) {
+                foreach($request->komik as $key => $value) {
+                    if (isset($request->idAlamat[$key])) {
+                        $alamat = Alamat::find($request->idAlamat[$key]);
+                    } else {
+                        $alamat = null;
+                    }
+        
+                    if($alamat) {
+                        $file_name = explode('/', $alamat->alamat)[1];
+                    } else {
+                        $file_name = str_replace(' ', '-', $request->input('judul')) . '-' . ($key + 1) . '.' . $value->extension();
+                    }
+        
+                    $path = 'storage/' . $file_name;
+                    $upload = $value->storeAs('public', $file_name);
+    
+                    if ($alamat && isset($request->idAlamat[$key])) {
+                        $insertAlamat = Alamat::where('alamat_komik_id', $request->idAlamat[$key])
+                                        ->update([
+                                            'alamat' => $path
+                                        ]);
+                    } else {
+                        $insertAlamat = Alamat::create([
+                            'komik_id' => $komik_id,
+                            'alamat' => $path
+                        ]);
+
+                        $insertMateri = Materi::create([
+                            'komik_id' => $komik_id,
+                            'alamat_komik_id' => $insertAlamat->alamat_komik_id,
+                            'isi' => $request->materi[$key]
+                        ]);
+                    }
+                }
+            }
+    
+            if (isset($request->materi)) {
+                foreach($request->materi as $key => $value) {
+                    if ($value && isset($request->idAlamat[$key])) {
+                        $materi = Materi::where('alamat_komik_id', $request->idAlamat[$key])->first();
+                        if ($materi) {
+                            $insertMateri = Materi::where('alamat_komik_id', $request->idAlamat[$key])
+                                            ->update([
+                                                'isi' => $value,
+                                            ]);
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'error' => 'Gagal update data. ErrMsg: ' . $e->getMessage()
+            ]);
+        }
+
+        DB::commit();
+        return redirect(route('admin-komik'))->with([
+            'success' => 'Berhasil update data'
+        ]);
     }
 
     /**
