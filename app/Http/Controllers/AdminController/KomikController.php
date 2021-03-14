@@ -228,6 +228,12 @@ class KomikController extends Controller
                                             ->update([
                                                 'isi' => $value,
                                             ]);
+                        } else {
+                            $insertMateri = Materi::create([
+                                'alamat_komik_id' => $request->idAlamat[$key],
+                                'isi' => $value,
+                                'komik_id' => $komik_id
+                            ]);
                         }
                     }
                 }
