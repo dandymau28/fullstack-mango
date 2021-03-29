@@ -91,7 +91,8 @@
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
-                ['para', ['ul', 'ol', 'paragraph']]
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table'. ['table']]
             ]
         });
     });
@@ -177,7 +178,8 @@
                 ['style', ['bold', 'italic', 'underline', 'clear']],
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
-                ['para', ['ul', 'ol', 'paragraph']]
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']]
             ]
         });
         /* var formDiv = '<div class="form-group komik">';

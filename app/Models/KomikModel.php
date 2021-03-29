@@ -35,7 +35,11 @@ class KomikModel extends Model
     }
 
     public function ujian() {
-        return $this->hasOne('App\Models\UjianModel', 'komik_id', 'komik_id');
+        return $this->hasOneThrough('App\Models\UjianModel', 'komik_id', 'komik_id');
+    }
+
+    public function ujian_nilai() {
+        return $this->hasManyThrough('App\Models\NilaiModel', 'App\Models\UjianModel', 'komik_id', 'ujian_id', 'komik_id', 'ujian_id');
     }
 
     public function buku() {

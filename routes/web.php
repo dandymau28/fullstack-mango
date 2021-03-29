@@ -68,6 +68,8 @@ Route::group([
     Route::get('/ujian/{id}', 'AdminController\UjianController@edit')->name('edit-ujian');
     Route::post('/ujian/{id}', 'AdminController\UjianController@update');
     Route::get('/ujian/{id}/delete', 'AdminController\UjianController@destroy')->name('delete-ujian');
+
+    Route::get('/nilai', 'AdminController\NilaiController@index')->name('admin-nilai');
 });
 // Route::resource('/datatables', 'AdminController\BukuController')->only([
 //     'dataBuku'
