@@ -16,6 +16,11 @@
       <li class="nav-item">
         <a class="nav-link" href="/profil">Profil</a>
       </li>
+      @if(auth()->user()->role === 'guru')
+      <li class="nav-item">
+        <a class="nav-link btn btn-danger" href="/admin-page">Go To Admin Page</a>
+      </li>
+      @endif
     </ul>
   </div>
 </nav>
