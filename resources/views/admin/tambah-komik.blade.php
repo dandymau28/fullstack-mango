@@ -92,7 +92,7 @@
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table'. ['table']]
+                ['table', ['table']]
             ]
         });
     });
