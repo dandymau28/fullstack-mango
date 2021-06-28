@@ -1,0 +1,9 @@
+Petunjuk Install Aplikasi:
+1. Lakukan 'composer install',
+2. Duplicate/Copy-paste file env.example menjadi .env,
+3. Lakukan 'php artisan key:generate',
+4. Sesuaikan konfigurasi database pada file .env,
+5. Lakukan 'php artisan migrate',
+6. Isi data pada table users untuk login admin. Pastikan role yang dipilih adalah 'guru',
+7. Lakukan 'php artisan serve',
+8. Happy Coding :)
