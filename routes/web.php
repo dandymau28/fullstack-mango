@@ -17,20 +17,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/login', 'WebController\AuthController@view')->name('login');
-Route::post('/login', 'WebController\AuthController@login')->name('login-post');
-Route::get('/register', 'WebController\AuthController@register_view');
-Route::post('/register', 'WebController\AuthController@register')->name('register');
+Route::get('/public/login', 'WebController\AuthController@view')->name('login');
+Route::post('/public/login', 'WebController\AuthController@login')->name('login-post');
+Route::get('/public/register', 'WebController\AuthController@register_view');
+Route::post('/public/register', 'WebController\AuthController@register')->name('register');
 
 Route::group([
-    'middleware' => 'auth'
+    'middleware' => 'auth',
+    'prefix' => 'public'
 ], function($router) {
     Route::get('/', 'WebController\DashboardController@index')->name('index');
-    
+
     Route::get('/komik/{id}', 'WebController\KomikController@show');
-    
+
     Route::get('/buku/{id}','WebController\BukuController@show');
-    
+
     Route::post('/komentar', 'WebController\KomentarController@store');
 
     Route::get('/latihan/{id}', 'WebController\UjianController@show');
@@ -46,7 +47,7 @@ Route::group([
 
 Route::group([
     'middleware' => 'auth',
-    'prefix' => 'admin-page'
+    'prefix' => 'public/admin-page'
 ], function($router) {
     Route::get('/','AdminController\DashboardController@index');
     Route::get('/buku','AdminController\BukuController@index')->name('admin-buku');
