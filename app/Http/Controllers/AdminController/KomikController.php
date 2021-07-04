@@ -34,9 +34,9 @@ class KomikController extends Controller
                             return '<span class="badge badge-warning">Belum Terbit</span>';
                         }
                     })
-                    ->addColumn('action', function($data){ 
+                    ->addColumn('action', function($data){
                         $btn = '<a href="komik/' . $data->komik_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->komik_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
-    
+
                         return $btn;
                     })
                     ->addColumn('gambar_sampul', function($data) {
@@ -91,23 +91,25 @@ class KomikController extends Controller
             ]);
 
             $i = 0;
-            foreach($request->komik as $value) {
-                $file_name = str_replace(' ', '-', $request->input('judul')) . '-' . ($i + 1) . '.' . $value->extension();
-                $path = 'storage/' . $file_name;
-                $upload = $value->storeAs('public', $file_name);
+            if ($request->has('komik')) {
+                foreach($request->komik as $value) {
+                    $file_name = str_replace(' ', '-', $request->input('judul')) . '-' . ($i + 1) . '.' . $value->extension();
+                    $path = 'storage/' . $file_name;
+                    $upload = $value->storeAs('public', $file_name);
 
-                $insertAlamat = Alamat::create([
-                    'komik_id' => $insertKomik->komik_id,
-                    'alamat' => $path
-                ]);
+                    $insertAlamat = Alamat::create([
+                        'komik_id' => $insertKomik->komik_id,
+                        'alamat' => $path
+                    ]);
 
-                $insertMateri = Materi::create([
-                    'komik_id' => $insertKomik->komik_id,
-                    'alamat_komik_id' => $insertAlamat->alamat_komik_id,
-                    'isi' => $request->materi[$i],
-                ]);
+                    $insertMateri = Materi::create([
+                        'komik_id' => $insertKomik->komik_id,
+                        'alamat_komik_id' => $insertAlamat->alamat_komik_id,
+                        'isi' => $request->materi[$i],
+                    ]);
 
-                $i++;
+                    $i++;
+                }
             }
         } catch (Exception $e) {
             DB::rollback();
@@ -171,17 +173,17 @@ class KomikController extends Controller
                 'judul' => $request->input('judul'),
                 'tingkat' => $request->input('tingkat'),
             ];
-    
+
             if ($request->hasFile('sampul')) {
                 $file_name = 'sampul-komik-' . str_replace(' ', '-', $request->input('judul')) . '.' . $request->sampul->extension();
                 $path = 'storage/' . $file_name;
                 $upload = $request->sampul->storeAs('public', $file_name);
                 $dataKomik['sampul'] = $path;
             }
-    
+
             $insertKomik = Komik::where('komik_id', $komik_id)
                         ->update($dataKomik);
-    
+
             if (isset($request->komik)) {
                 foreach($request->komik as $key => $value) {
                     if (isset($request->idAlamat[$key])) {
@@ -189,16 +191,16 @@ class KomikController extends Controller
                     } else {
                         $alamat = null;
                     }
-        
+
                     if($alamat) {
                         $file_name = explode('/', $alamat->alamat)[1];
                     } else {
                         $file_name = str_replace(' ', '-', $request->input('judul')) . '-' . ($key + 1) . '.' . $value->extension();
                     }
-        
+
                     $path = 'storage/' . $file_name;
                     $upload = $value->storeAs('public', $file_name);
-    
+
                     if ($alamat && isset($request->idAlamat[$key])) {
                         $insertAlamat = Alamat::where('alamat_komik_id', $request->idAlamat[$key])
                                         ->update([
@@ -218,7 +220,7 @@ class KomikController extends Controller
                     }
                 }
             }
-    
+
             if (isset($request->materi)) {
                 foreach($request->materi as $key => $value) {
                     if ($value && isset($request->idAlamat[$key])) {

@@ -76,8 +76,12 @@
   </div>
   <div style="background-color: white; height: 5em; display: block; width: 60%; padding-top: 1em; margin: 0 auto;">
     <div class="container">
-      <a href="/latihan/{{$alamatKomik[0]->komik_id}}" class="btn btn-primary btn-lg btn-block">
-        <h2>Yuk Latihan</h2>
+      <a href="/latihan/{{$dataKomik->komik_id}}" class="btn btn-primary btn-lg btn-block">
+        @if (count($alamatKomik) >= 1)
+            <h2><strong>れんしゅうしましょう</strong></h2>
+        @else
+            <h2><strong>テスト</strong></h2>
+        @endif
         {{session('status')}}
       </a>
     </div>
@@ -92,7 +96,7 @@
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
         </div>
         <div class="form-group">
-          <input type="hidden" value="{{$alamatKomik[0]->komik_id}}" name="komik_id">
+          <input type="hidden" value="{{$dataKomik->komik_id}}" name="komik_id">
           <input type="submit" class="btn btn-success" value="Kirim" style="float: right;">
         </div>
       </form>
