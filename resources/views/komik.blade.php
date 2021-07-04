@@ -72,7 +72,7 @@
         </div>
       @endforeach
     </div>
-    
+
   </div>
   <div style="background-color: white; height: 5em; display: block; width: 60%; padding-top: 1em; margin: 0 auto;">
     <div class="container">
@@ -114,7 +114,7 @@
                   <span>{{$komentar->nama}}</span>
                 </div>
                 <div class="">
-                  </span>{{$komentar->created_at}}</span>
+                  </span>{{ Carbon::parse($komentar->created_at)->locale('id_ID')->diffForHumans }}</span>
                 </div>
               </div>
               <div class="isi-komentar">
