@@ -4,7 +4,7 @@
     <a href="index3.html" class="brand-link">
       <img src="{{asset('image/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Konnichiwa Sensei</span>
     </a>
 
     <!-- Sidebar -->
@@ -15,7 +15,7 @@
           <img src="{{asset('image/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Dandy Maulana</a>
+          <a href="#" class="d-block">{{ Auth::user()->username }}</a>
         </div>
       </div>
 
@@ -56,7 +56,15 @@
               </p>
             </a>
           </li>
-{{--           
+          <li class="nav-item">
+            <a href="/logout" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p>
+                Logout
+              </p>
+            </a>
+          </li>
+{{--
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
