@@ -17,14 +17,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/public/login', 'WebController\AuthController@view')->name('login');
-Route::post('/public/login', 'WebController\AuthController@login')->name('login-post');
-Route::get('/public/register', 'WebController\AuthController@register_view');
-Route::post('/public/register', 'WebController\AuthController@register')->name('register');
+Route::get('/login', 'WebController\AuthController@view')->name('login');
+Route::post('/login', 'WebController\AuthController@login')->name('login-post');
+Route::get('/register', 'WebController\AuthController@register_view');
+Route::post('/register', 'WebController\AuthController@register')->name('register');
 
 Route::group([
-    'middleware' => 'auth',
-    'prefix' => 'public'
+    'middleware' => 'auth'
 ], function($router) {
     Route::get('/', 'WebController\DashboardController@index')->name('index');
 
@@ -47,7 +46,7 @@ Route::group([
 
 Route::group([
     'middleware' => 'auth',
-    'prefix' => 'public/admin-page'
+    'prefix' => 'admin-page'
 ], function($router) {
     Route::get('/','AdminController\DashboardController@index');
     Route::get('/buku','AdminController\BukuController@index')->name('admin-buku');
