@@ -114,7 +114,7 @@
                   <span>{{$komentar->nama}}</span>
                 </div>
                 <div class="">
-                  </span>{{ Carbon::parse($komentar->created_at)->locale('id_ID')->diffForHumans }}</span>
+                  </span>{{ \Carbon\Carbon::parse($komentar->created_at)->locale('id_ID')->diffForHumans() }}</span>
                 </div>
               </div>
               <div class="isi-komentar">
