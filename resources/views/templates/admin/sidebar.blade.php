@@ -25,6 +25,12 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <a href="/" class="nav-link">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>Siswa Page</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/admin-page/buku" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -54,12 +60,6 @@
               <p>
                 Nilai
               </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Siswa Page</p>
             </a>
           </li>
           <li class="nav-item">
