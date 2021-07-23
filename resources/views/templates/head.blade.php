@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{asset('css/style2.css')}}" />
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet" />
+
+
     @stack('styles')
 </head>
 
