@@ -28,6 +28,7 @@ Route::group([
     Route::get('/', 'WebController\DashboardController@index')->name('index');
 
     Route::get('/komik/{id}', 'WebController\KomikController@show');
+    Route::post('/unlock', 'WebController\KomikController@unlockKomik')->name('unlock-komik');
 
     Route::get('/buku/{id}','WebController\BukuController@show');
 
