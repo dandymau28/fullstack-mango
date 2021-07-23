@@ -17,7 +17,8 @@ class KomikModel extends Model
         'judul',
         'tingkat',
         'status',
-        'sampul'
+        'sampul',
+        'token'
     ];
 
     protected $dates = [
