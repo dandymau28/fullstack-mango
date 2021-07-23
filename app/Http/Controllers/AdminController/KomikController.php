@@ -27,6 +27,13 @@ class KomikController extends Controller
                     ->addColumn('judul_buku', function($data) {
                         return $data->buku->judul;
                     })
+                    ->editColumn('token', function($data) {
+                        if (!$data->token) {
+                            return '<button id="gen-'. $data->komik_id .'" class="btn btn-primary" onclick="generateToken('. $data->komik_id .')">Generate</button>';
+                        } else {
+                            return '<span class="badge badge-success">' . $data->token . '</span>';
+                        }
+                    })
                     ->editColumn('status', function($data) {
                         if ($data->status == 'terbit') {
                             return '<span class="badge badge-primary">Terbit</span>';
@@ -43,7 +50,7 @@ class KomikController extends Controller
                         return "<img src=" . asset($data->sampul) . " width='80px' height='80px'>";
                     })
                     ->removeColumn('buku_id')
-                    ->rawColumns(['action', 'gambar_sampul', 'status'])
+                    ->rawColumns(['action', 'gambar_sampul', 'status', 'token'])
                     ->make(true);
         }
         return view('admin.komik');
@@ -278,5 +285,30 @@ class KomikController extends Controller
         return back()->with([
             'success' => 'Berhasil hapus komik'
         ]);
+    }
+
+    public function generateToken($komik_id) {
+        try {
+            DB::beginTransaction();
+            $token = $this->randomToken(6);
+
+            $updateData = Komik::where('komik_id', $komik_id)->update(['token' => $token]);
+
+            DB::commit();
+            return response()->json(['token' => $token], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Gagal Generate Token. err: ' . $e->getMessage()], 500);
+        }
+    }
+
+    function randomToken($length) {
+        $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $charLengths = strlen($characters);
+        $randomString = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charLengths - 1)];
+        }
+        return $randomString;
     }
 }
