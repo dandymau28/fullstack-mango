@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\KomikModel as Komik;
 use App\Models\AlamatKomikModel as AlamatKomik;
 use App\Models\MateriModel as Materi;
+use Illuminate\Support\Facades\Auth;
 use DB;
+use Exception;
+
 
 class KomikController extends Controller
 {
@@ -51,6 +54,13 @@ class KomikController extends Controller
      */
     public function show($id)
     {
+        $unlocked = DB::table('siswa_unlock_komik')->where('user_id', Auth::user()->user_id)->where('komik_id', $id)->first();
+        if (!$unlocked) {
+            return view('unlock_komik')->with([
+                'komik_id' => $id
+            ]);
+        }
+
         $dataKomik = Komik::whereNull('deleted_at')
                 ->where('komik_id', $id)
                 ->first();
@@ -111,5 +121,30 @@ class KomikController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function unlockKomik(Request $request) {
+        try {
+            $unlocked = DB::table('siswa_unlock_komik')->where('user_id', Auth::user()->user_id)->where('komik_id', $request->input('komik_id'))->first();
+            if ($unlocked) throw new Exception("Komik sudah terbuka");
+
+            $matchToken = DB::table('komik')->where('komik_id', $request->input('komik_id'))->first();
+            if ($matchToken->token != $request->input('token')) throw new Exception("Token salah");
+
+            DB::beginTransaction();
+            $insertData = DB::table('siswa_unlock_komik')->insert([
+                'user_id' => Auth::user()->user_id,
+                'komik_id' => $request->input('komik_id'),
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+
+            DB::commit();
+            return back();
+        } catch(\Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }
