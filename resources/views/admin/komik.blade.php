@@ -27,6 +27,7 @@
                                     <th>Buku</th>
                                     <th>Sampul</th>
                                     <th width="100px">Status Terbit</th>
+                                    <th>Token</th>
                                     <th width="100px">Action</th>
                                     {{-- <th>Engine version</th>
                                     <th>CSS grade</th> --}}
@@ -39,6 +40,7 @@
                                     <th>Buku</th>
                                     <th>Sampul</th>
                                     <th width="100px">Status Terbit</th>
+                                    <th>Token</th>
                                     <th width="100px">Action</th>
                                     {{-- <th>Engine version</th>
                                     <th>CSS grade</th> --}}
@@ -57,10 +59,23 @@
 @endsection
 
 @push('js')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{asset('admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <script>
+    function generateToken(id) {
+        axios.get('/api/generateToken/' + id)
+        .then((response) => {
+            let token = response.data.token;
+            console.log(token)
+            $('#gen-' + id).replaceWith(`<span class="badge badge-success">${token}</span>`);
+        })
+        .catch((err) => {
+            alert(err)
+        }) ;
+    }
+
     function deleteUrl(id) {
         Swal.fire({
             title: 'Yakin dihapus?',
@@ -97,6 +112,7 @@
                 {data: 'judul_buku', name: 'judul_buku'},
                 {data: 'gambar_sampul', name: 'sampul', orderable: false, searchable: false},
                 {data: 'status', name: 'status', searchable: false},
+                {data: 'token', name: 'token', searchable:false, orderable: false},
                 {data: 'action', name: 'action', orderable: false, searchable: false},
             ]
         })
