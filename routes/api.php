@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/register', 'AuthController@register'); //
 Route::get('/user/{user_id}/verifikasi/{code}', 'AuthController@verification');  //
 Route::post('/login', 'AuthController@login'); //
+Route::get('/generateToken/{komik_id}', 'AdminController\KomikController@generateToken');
 
 Route::middleware('jwt.verify')->group(function() {
     //Route Tambah
@@ -34,7 +35,7 @@ Route::middleware('jwt.verify')->group(function() {
     //Route Buku
     Route::get('/buku', 'BukuController@index'); //
     Route::get('/buku/{buku_id}/komik', 'KomikController@showByBuku'); //
-    
+
     //Route Komik
     Route::get('/komik/{komik_id}', 'KomikController@showById'); //
     Route::get('/komik', 'KomikController@index'); //
@@ -42,19 +43,19 @@ Route::middleware('jwt.verify')->group(function() {
     Route::get('/komik/{komik_id}/ujian', 'UjianController@showByIdKomik'); //
     Route::get('/komik/{komik_id}/komentar', 'KomentarController@showByIdKomik'); //
     Route::post('/komik/{komik_id}/komentar', 'KomentarController@storeByIdKomik'); //
-    
+
     //Route Ujian
     Route::get('/ujian/{ujian_id}/soal', 'SoalController@showByIdUjian'); //
     Route::post('/ujian/{ujian_id}', 'UjianController@storeByIdUjian');  //
-    
+
     //Route Soal
     Route::get('/soal/{soal_id}/jawaban', 'PilihanJawabanController@showByIdSoal'); //
-    
+
     // Route Nilai
     Route::get('/nilai', 'NilaiController@index'); //
     Route::get('/nilai/{ujian_id}/ujian', 'NilaiController@showByIdUjian'); //
     Route::get('/user/{user_id}/nilai', 'NilaiController@showByIdUser'); //
-    
+
     // Route User
     Route::get('/user', 'UserController@showByIdUser');  //
     Route::post('/user', 'UserController@updateByIdUser'); //
