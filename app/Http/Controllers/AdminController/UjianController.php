@@ -27,7 +27,7 @@ class UjianController extends Controller
                 ->addColumn('komik', function($data) {
                     return $data->komik->judul;
                 })
-                ->addColumn('action', function($data){ 
+                ->addColumn('action', function($data){
                     $btn = '<a href="ujian/' . $data->ujian_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->ujian_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
 
                     return $btn;
@@ -114,7 +114,8 @@ class UjianController extends Controller
         return view('admin.edit-ujian')->with([
             'ujian' => $ujian,
             'soal' => $soal,
-            'komik' => $komik
+            'daftar_komik' => $komik,
+            'unixTime' => $unixTime
         ]);
     }
 
