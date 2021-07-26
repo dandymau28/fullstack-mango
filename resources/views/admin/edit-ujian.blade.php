@@ -45,51 +45,59 @@
         </div>
         <!-- /.card-body -->
 
-        <div class="card-body input-soal" id="input-soal">
-            <div class="form-group soal" id="input-soal-1">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <label for="soal-1">Soal 1</label>
+        @for ($i = 0; $i < $count; $i++)
+            <div class="card-body input-soal" id="input-soal">
+                <div id="input-soal-{{($i+1)}}">
+                    <div class="form-group soal">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <label for={{"soal-" . ($i + 1)}}>Soal {{($i + 1)}}</label>
+                            </div>
+                            <div style="/*padding: 50px 0px;*/">
+                                <button class="btn btn-danger btn-sm" id="hapus-soal" data-id="{{($i+1)}}"
+                                    onclick="deletePanel({{($i + 1)}});">Hapus Soal</button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <textarea class="textarea" name="pertanyaan[]" id="pertanyaan-{{($i+1)}}">{{$soal[$i]->pertanyaan}}</textarea>
+                        </div>
                     </div>
-                    <div style="/*padding: 50px 0px;*/">
-                        <button class="btn btn-danger btn-sm" id="hapus-soal" data-id="1"
-                            onclick="deletePanel(1);">Hapus Soal</button>
+                    <div class="form-row my-2">
+                        <div class="col">
+                            <label for="soal-1">Pilihan Jawaban 1</label>
+                            <input type="text" name="jawaban_1[]" class="form-control" placeholder="Pilihan Jawaban 1" value={{ $pilihan_jawaban[($soal[$i]->soal_id)][0]->jawaban }}>
+                        </div>
+                        <div class="col">
+                            <label for="soal-1">Pilihan Jawaban 2</label>
+                            <input type="text" name="jawaban_2[]" class="form-control" placeholder="Pilihan Jawaban 2" value={{ $pilihan_jawaban[$soal[$i]->soal_id][1]->jawaban }}>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="soal-1">Pilihan Jawaban 3</label>
+                            <input type="text" name="jawaban_3[]" class="form-control" placeholder="Pilihan Jawaban 3" value={{ $pilihan_jawaban[$soal[$i]->soal_id][2]->jawaban }}>
+                        </div>
+                        <div class="col">
+                            <label for="soal-1">Pilihan Jawaban 4</label>
+                            <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4" value={{ $pilihan_jawaban[$soal[$i]->soal_id][3]->jawaban }}>
+                        </div>
+                    </div>
+                    <div class="form-group mt-4">
+                    <label for="jawaban_benar">Jawaban Benar</label>
+                    @for($j = 0; $j < 4; $j++)
+                        <div class="form-check">
+                            @if ($soal[$i]->jawaban_benar === $pilihan_jawaban[$soal[$i]->soal_id][$j]->jawaban)
+                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" checked>
+                            @else
+                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" >
+                            @endif
+                            <label class="form-check-label" for="jawabanBenar{{$j + 1}}"> Jawaban {{$j + 1}} </label>
+                        </div>
+                    @endfor
                     </div>
                 </div>
-                <div class="input-group">
-                    <textarea class="textarea" name="pertanyaan[]" id="pertanyaan-1"></textarea>
-                </div>
             </div>
-            <div class="form-row my-2">
-                <div class="col">
-                    <label for="soal-1">Pilihan Jawaban 1</label>
-                    <input type="text" name="jawaban_1[]" class="form-control" placeholder="Pilihan Jawaban 1">
-                </div>
-                <div class="col">
-                    <label for="soal-1">Pilihan Jawaban 2</label>
-                    <input type="text" name="jawaban_2[]" class="form-control" placeholder="Pilihan Jawaban 2">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="col">
-                    <label for="soal-1">Pilihan Jawaban 3</label>
-                    <input type="text" name="jawaban_3[]" class="form-control" placeholder="Pilihan Jawaban 3">
-                </div>
-                <div class="col">
-                    <label for="soal-1">Pilihan Jawaban 4</label>
-                    <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4">
-                </div>
-            </div>
-            <div class="form-group mt-4">
-            <label for="jawaban_benar">Jawaban Benar</label>
-            @for($i = 0; $i < 4; $i++)
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$i + 1}}" value="{{$i + 1}}">
-                    <label class="form-check-label" for="jawabanBenar{{$i + 1}}"> Jawaban {{$i + 1}} </label>
-                </div>
-            @endfor
-            </div>
-        </div>
+        @endfor
 
         <div class="card-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
@@ -118,6 +126,12 @@
                 ['table', ['table']]
             ]
         });
+
+        for (i = 1; i < $('.textarea').length; i++) {
+            if ($('#pertanyaan-' + i).val() !== "") {
+                $('#pertanyaan-' + i).summernote('editor.pasteHTML', $(this).val());
+            }
+        }
     });
 
     $('#tambah-soal').on('click', function (e) {
@@ -125,7 +139,8 @@
 
         var count = $('.soal').length + 1;
         let soal = `
-            <div class="form-group soal" id="input-soal-${count}">
+        <div id="input-soal-${count}">
+            <div class="form-group soal">
                 <div class="d-flex justify-content-between">
                     <div>
                         <label for="soal-${count}">Soal ${count}</label>
@@ -178,6 +193,7 @@
                     <label class="form-check-label" for="jawabanBenar4"> Jawaban 4 </label>
                 </div>
             </div>
+        </div>
         `;
 
         let append = $('#input-soal').append(soal);
