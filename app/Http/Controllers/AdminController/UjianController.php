@@ -145,6 +145,55 @@ class UjianController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // dd($request->input());
+        DB::beginTransaction();
+
+        $soalCount = count($request->input('pertanyaan'));
+        try {
+            $updateUjian = Ujian::where('ujian_id', $id)->update([
+                'komik_id' => $request->input('komik'),
+                'waktu_ujian' => $request->input('tanggal_ujian') . ' ' .$request->input('jam_ujian'),
+                'durasi_ujian' => $request->input('durasi_ujian')
+            ]);
+
+            for ($i = 0; $i < $soalCount; $i++) {
+                if (isset($request->input('soal_id')[$i])) {
+                    $updateSoal = Soal::where('soal_id', $request->input('soal_id')[$i])->update([
+                        'pertanyaan' => $request->input('pertanyaan')[$i],
+                        'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i]
+                    ]);
+
+                    for ($j = 0; $j < 4; $j++) {
+                        $updatePilihanJawaban = Jawaban::where('pilihan_jawaban_id', $request->input('jawaban_'. ($j + 1) .'_id')[$i])->update([
+                            'jawaban' => $request->input('jawaban_' . ($j + 1))[$i]
+                        ]);
+                    }
+                } else {
+                    $insertSoal = Soal::create([
+                        'pertanyaan' => $request->input('pertanyaan')[$i],
+                        'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i],
+                        'ujian_id' => $id
+                    ]);
+
+                    for ($j = 0; $j < 4; $j++) {
+                        $insertJawaban = Jawaban::create([
+                            'soal_id' => $insertSoal->soal_id,
+                            'jawaban' => $request->input('jawaban_' . ($j + 1))[$i]
+                        ]);
+                    }
+                }
+            }
+        } catch(\Exception $e) {
+            DB::rollback();
+            return back()->with([
+                'error' => 'Gagal update ujian. ErrMsg: ' . $e->getMessage()
+            ]);
+        }
+
+        DB::commit();
+        return redirect(route('admin-ujian'))->with([
+            'success' => 'Berhasil update ujian.'
+        ]);
     }
 
     /**
