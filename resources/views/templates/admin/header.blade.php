@@ -6,8 +6,8 @@
             <h1 class="m-0 text-dark">Dashboard v2</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
-        @if(session('error'))
-        @foreach(session('error')->messages() as $key => $value)
+        @if(session('errors'))
+        @foreach(session('errors')->messages() as $key => $value)
         @foreach($value as $message)
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {{$message}}
@@ -17,6 +17,13 @@
         </div>
         @endforeach
         @endforeach
+        @elseif(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{session('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         @endif
         @if(session('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
