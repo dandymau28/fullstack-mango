@@ -23,7 +23,7 @@ class BukuController extends Controller
             $data = Buku::oldest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($data){ 
+                ->addColumn('action', function($data){
                     $btn = '<a href="buku/' . $data->buku_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->buku_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
 
                     return $btn;
@@ -32,7 +32,7 @@ class BukuController extends Controller
                     $img = "<img src=" . asset($data->sampul) . " width='80px' height='80px'>";
 
                     return $img;
-                
+
                 })
                 ->rawColumns(['action', 'gambar_sampul'])
                 ->make(true);
@@ -72,7 +72,7 @@ class BukuController extends Controller
 
         if ($validator->fails()) {
             return back()->with([
-                'error' => $validator->errors()
+                'errors' => $validator->errors()
             ]);
         }
 
@@ -143,7 +143,7 @@ class BukuController extends Controller
 
         if ($validator->fails()) {
             return back()->with([
-                'error' => $validator->errors()
+                'errors' => $validator->errors()
             ]);
         }
 
@@ -161,7 +161,7 @@ class BukuController extends Controller
                 $upload = $request->sampul->storeAs('public', $file_name);
                 $data['sampul'] = $path;
             }
-    
+
             $insert = Buku::where('buku_id', $id)->update($data);
         } catch (Exception $e) {
             DB::rollback();
