@@ -16,6 +16,9 @@
       <li class="nav-item">
         <a class="nav-link" href="/profil">Profil</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
       @if(auth()->user()->role === 'guru')
       <li class="nav-item">
         <a class="nav-link btn btn-danger" href="/admin-page">Go To Admin Page</a>
