@@ -106,17 +106,7 @@ class UjianController extends Controller
      */
     public function show($id)
     {
-        $ujian = Ujian::find($id);
-        $soal = $ujian->soal;
-        $komik = Komik::all();
-        $unixTime = strtotime($ujian->waktu_ujian);
-
-        return view('admin.edit-ujian')->with([
-            'ujian' => $ujian,
-            'soal' => $soal,
-            'daftar_komik' => $komik,
-            'unixTime' => $unixTime
-        ]);
+        //
     }
 
     /**
@@ -127,7 +117,22 @@ class UjianController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ujian = Ujian::find($id);
+        $soal = $ujian->soal;
+        foreach($soal as $nomor) {
+            $pilihan_jawaban[$nomor->soal_id] = $nomor->pilihan_jawaban;
+        }
+        $komik = Komik::all();
+        $unixTime = strtotime($ujian->waktu_ujian);
+
+        return view('admin.edit-ujian')->with([
+            'ujian' => $ujian,
+            'soal' => $soal,
+            'daftar_komik' => $komik,
+            'unixTime' => $unixTime,
+            'pilihan_jawaban' => $pilihan_jawaban,
+            'count' => count($soal)
+        ]);
     }
 
     /**
