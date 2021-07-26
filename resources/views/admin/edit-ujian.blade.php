@@ -46,12 +46,13 @@
         <!-- /.card-body -->
 
         @for ($i = 0; $i < $count; $i++)
+            <input type="hidden" name="soal_id[]" value="{{ $soal[$i]->soal_id }}">
             <div class="card-body input-soal" id="input-soal">
-                <div id="input-soal-{{($i+1)}}">
+                <div id="input-soal-{{($i + 1)}}">
                     <div class="form-group soal">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <label for={{"soal-" . ($i + 1)}}>Soal {{($i + 1)}}</label>
+                                <label for="soal-{{($i + 1)}}">Soal {{($i + 1)}}</label>
                             </div>
                             <div style="/*padding: 50px 0px;*/">
                                 <button class="btn btn-danger btn-sm" id="hapus-soal" data-id="{{($i+1)}}"
@@ -65,20 +66,24 @@
                     <div class="form-row my-2">
                         <div class="col">
                             <label for="soal-1">Pilihan Jawaban 1</label>
+                            <input type="hidden" name="jawaban_1_id[]" value="{{ $pilihan_jawaban[($soal[$i]->soal_id)][0]->pilihan_jawaban_id }}">
                             <input type="text" name="jawaban_1[]" class="form-control" placeholder="Pilihan Jawaban 1" value={{ $pilihan_jawaban[($soal[$i]->soal_id)][0]->jawaban }}>
                         </div>
                         <div class="col">
                             <label for="soal-1">Pilihan Jawaban 2</label>
+                            <input type="hidden" name="jawaban_2_id[]" value="{{ $pilihan_jawaban[($soal[$i]->soal_id)][1]->pilihan_jawaban_id }}">
                             <input type="text" name="jawaban_2[]" class="form-control" placeholder="Pilihan Jawaban 2" value={{ $pilihan_jawaban[$soal[$i]->soal_id][1]->jawaban }}>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="col">
                             <label for="soal-1">Pilihan Jawaban 3</label>
+                            <input type="hidden" name="jawaban_3_id[]" value="{{ $pilihan_jawaban[($soal[$i]->soal_id)][2]->pilihan_jawaban_id }}">
                             <input type="text" name="jawaban_3[]" class="form-control" placeholder="Pilihan Jawaban 3" value={{ $pilihan_jawaban[$soal[$i]->soal_id][2]->jawaban }}>
                         </div>
                         <div class="col">
                             <label for="soal-1">Pilihan Jawaban 4</label>
+                            <input type="hidden" name="jawaban_4_id[]" value="{{ $pilihan_jawaban[($soal[$i]->soal_id)][3]->pilihan_jawaban_id }}">
                             <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4" value={{ $pilihan_jawaban[$soal[$i]->soal_id][3]->jawaban }}>
                         </div>
                     </div>
@@ -87,9 +92,9 @@
                     @for($j = 0; $j < 4; $j++)
                         <div class="form-check">
                             @if ($soal[$i]->jawaban_benar === $pilihan_jawaban[$soal[$i]->soal_id][$j]->jawaban)
-                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" checked>
+                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_{{($i + 1)}}]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" checked>
                             @else
-                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" >
+                            <input class="form-check-input" type="radio" name="jawaban_benar[soal_{{ ($i + 1) }}]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" >
                             @endif
                             <label class="form-check-label" for="jawabanBenar{{$j + 1}}"> Jawaban {{$j + 1}} </label>
                         </div>
