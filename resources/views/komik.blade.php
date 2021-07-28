@@ -78,7 +78,7 @@
     <div class="container">
       <a href="/latihan/{{$dataKomik->komik_id}}" class="btn btn-primary btn-lg btn-block">
         @if (count($alamatKomik) >= 1)
-            <h2><strong>れんしゅうしましょう</strong></h2>
+            <h2><strong>やってみましょう！</strong></h2>
         @else
             <h2><strong>テスト</strong></h2>
         @endif
