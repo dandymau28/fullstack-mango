@@ -78,7 +78,7 @@ class UjianController extends Controller
                     'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')[$stateSoal])[$i]
                 ]);
 
-                for($j = 0; $j < 4; $j++) {
+                for($j = 0; $j < 5; $j++) {
                     $jawaban = Jawaban::create([
                         'soal_id' => $insertSoal->soal_id,
                         'jawaban' => $request->input('jawaban_'.($j + 1))[$i]
@@ -163,7 +163,7 @@ class UjianController extends Controller
                         'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i]
                     ]);
 
-                    for ($j = 0; $j < 4; $j++) {
+                    for ($j = 0; $j < 5; $j++) {
                         $updatePilihanJawaban = Jawaban::where('pilihan_jawaban_id', $request->input('jawaban_'. ($j + 1) .'_id')[$i])->update([
                             'jawaban' => $request->input('jawaban_' . ($j + 1))[$i]
                         ]);
@@ -175,7 +175,7 @@ class UjianController extends Controller
                         'ujian_id' => $id
                     ]);
 
-                    for ($j = 0; $j < 4; $j++) {
+                    for ($j = 0; $j < 5; $j++) {
                         $insertJawaban = Jawaban::create([
                             'soal_id' => $insertSoal->soal_id,
                             'jawaban' => $request->input('jawaban_' . ($j + 1))[$i]
