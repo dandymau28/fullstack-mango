@@ -39,6 +39,8 @@ class KomentarController extends Controller
     {
         $komentar = new Komentar;
 
+        $backUrl = app('url')->previous() . '#komentar';
+
         DB::beginTransaction();
         try {
             $komentar->user_id = auth()->user()->user_id;
@@ -53,7 +55,7 @@ class KomentarController extends Controller
         }
         DB::commit();
 
-        return back()->with([
+        return redirect()->to($backUrl)->with([
             'success' => 'Berhasil komentar!'
         ]);
     }
