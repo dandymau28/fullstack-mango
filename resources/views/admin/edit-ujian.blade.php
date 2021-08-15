@@ -87,11 +87,20 @@
                             <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4" value={{ $pilihan_jawaban[$soal[$i]->soal_id][3]->jawaban }}>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col">
+                            <label for="soal-1">Pilihan Jawaban 5</label>
+                            <input type="hidden" name="jawaban_5_id[]" value="{{ @$pilihan_jawaban[($soal[$i]->soal_id)][4]->pilihan_jawaban_id }}">
+                            <input type="text" name="jawaban_5[]" class="form-control" placeholder="Pilihan Jawaban 5" value={{ @$pilihan_jawaban[$soal[$i]->soal_id][4]->jawaban }}>
+                        </div>
+                        <div class="col">
+                        </div>
+                    </div>
                     <div class="form-group mt-4">
                     <label for="jawaban_benar">Jawaban Benar</label>
-                    @for($j = 0; $j < 4; $j++)
+                    @for($j = 0; $j < 5; $j++)
                         <div class="form-check">
-                            @if ($soal[$i]->jawaban_benar === $pilihan_jawaban[$soal[$i]->soal_id][$j]->jawaban)
+                            @if ($soal[$i]->jawaban_benar === @$pilihan_jawaban[$soal[$i]->soal_id][$j]->jawaban)
                             <input class="form-check-input" type="radio" name="jawaban_benar[soal_{{($i + 1)}}]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" checked>
                             @else
                             <input class="form-check-input" type="radio" name="jawaban_benar[soal_{{ ($i + 1) }}]" id="jawabanBenar{{$j + 1}}" value="{{$j + 1}}" >
@@ -179,6 +188,13 @@
                     <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4">
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col">
+                    <label for="soal-${count}">Pilihan Jawaban 5</label>
+                    <input type="text" name="jawaban_5[]" class="form-control" placeholder="Pilihan Jawaban 5">
+                </div>
+                <div class="col"></div>
+            </div>
             <div class="form-group mt-4">
             <label for="jawaban_benar">Jawaban Benar</label>
                 <div class="form-check">
@@ -196,6 +212,10 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="jawaban_benar[soal_${count}]" id="jawabanBenar4" value="4">
                     <label class="form-check-label" for="jawabanBenar4"> Jawaban 4 </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jawaban_benar[soal_${count}]" id="jawabanBenar5" value="5">
+                    <label class="form-check-label" for="jawabanBenar5"> Jawaban 5 </label>
                 </div>
             </div>
         </div>

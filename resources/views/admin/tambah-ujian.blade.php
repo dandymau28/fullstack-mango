@@ -78,9 +78,17 @@
                         <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4">
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="soal-1">Pilihan Jawaban 5</label>
+                        <input type="text" name="jawaban_5[]" class="form-control" placeholder="Pilihan Jawaban 5">
+                    </div>
+                    <div class="col">
+                    </div>
+                </div>
                 <div class="form-group mt-4">
                 <label for="jawaban_benar">Jawaban Benar</label>
-                @for($i = 0; $i < 4; $i++)
+                @for($i = 0; $i < 5; $i++)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="jawaban_benar[soal_1]" id="jawabanBenar{{$i + 1}}" value="{{$i + 1}}">
                         <label class="form-check-label" for="jawabanBenar{{$i + 1}}"> Jawaban {{$i + 1}} </label>
@@ -158,6 +166,14 @@
                     <input type="text" name="jawaban_4[]" class="form-control" placeholder="Pilihan Jawaban 4">
                 </div>
             </div>
+            <div class="form-row">
+                <div class="col">
+                </div>
+                <div class="col">
+                    <label for="soal-${count}">Pilihan Jawaban 5</label>
+                    <input type="text" name="jawaban_5[]" class="form-control" placeholder="Pilihan Jawaban 5">
+                </div>
+            </div>
             <div class="form-group mt-4">
             <label for="jawaban_benar">Jawaban Benar</label>
                 <div class="form-check">
@@ -175,6 +191,10 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="jawaban_benar[soal_${count}]" id="jawabanBenar4" value="4">
                     <label class="form-check-label" for="jawabanBenar4"> Jawaban 4 </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="jawaban_benar[soal_${count}]" id="jawabanBenar5" value="5">
+                    <label class="form-check-label" for="jawabanBenar5"> Jawaban 5 </label>
                 </div>
             </div>
         </div>
