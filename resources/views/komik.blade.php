@@ -102,7 +102,7 @@
       </form>
     </div>
 
-    <div class="komentar-section">
+    <div class="komentar-section" id="komentar">
     @foreach($komentars as $komentar)
       <div class="single-komentar">
         <div class="row">
