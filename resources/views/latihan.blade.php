@@ -10,7 +10,7 @@
         <div class="soal" id="{{'soal_'.$key}}">
           もんだい <span>{{$key + 1}}</span>
           <p class="my-3">
-            {{$value->pertanyaan}}
+            {!!$value->pertanyaan!!}
           </p class="mx-3">
           <div class="my-4 jawaban">
             @foreach($value->pilihan_jawaban as $jawaban)
