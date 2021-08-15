@@ -14,8 +14,10 @@
           </p class="mx-3">
           <div class="my-4 jawaban">
             @foreach($value->pilihan_jawaban as $jawaban)
-            <input type="radio" id="{{$jawaban->jawaban}}" name="{{$value->soal_id}}" value="{{$jawaban->jawaban}}" data-id="{{$key}}">
-            <label for="{{$jawaban->jawaban}}">{{$jawaban->jawaban}}</label>
+            <div class="radio-jawaban">
+                <input type="radio" id="{{$jawaban->jawaban}}" name="{{$value->soal_id}}" value="{{$jawaban->jawaban}}" data-id="{{$key}}">
+                <label for="{{$jawaban->jawaban}}">{{$jawaban->jawaban}}</label>
+            </div>
             @endforeach
           </div>
         </div>
