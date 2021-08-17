@@ -150,13 +150,7 @@ body {
 }
 
 .margin-komentar {
-    margin-bottom: 5em;
-}
-
-.foto-komentar {
-    height: 50px;
-    width: 50px;
-    border-radius: 500px;
+    margin-bottom: 10em;
 }
 
 .nama-profil-komentar {
@@ -165,10 +159,12 @@ body {
 
 .isi-komentar {
     margin-left: -10px;
+    margin-right: 10px;
 }
 
 .single-komentar {
-    padding: 15px;
+    padding: 10px;
+    padding-left: 30px;
     border: 1px solid #D6D6D6;
 }
 
