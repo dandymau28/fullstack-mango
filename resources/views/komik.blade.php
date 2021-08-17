@@ -78,9 +78,9 @@
     <div class="container">
       <a href="/latihan/{{$dataKomik->komik_id}}" class="btn btn-primary btn-lg btn-block">
         @if (count($alamatKomik) >= 1)
-            <h2><strong>やってみましょう！</strong></h2>
+            <h2 id="jp-latihan"><strong>やってみましょう！</strong></h2>
         @else
-            <h2><strong>テスト</strong></h2>
+            <h2 id="jp-latihan"><strong>テスト</strong></h2>
         @endif
         {{session('status')}}
       </a>
@@ -93,11 +93,11 @@
       @csrf
         <div class="form-group">
           <label for="exampleFormControlTextarea1" style="font-weight: bold;">Komentar</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="komentar"></textarea>
+          <textarea class="form-control" id="message" rows="3" name="komentar"></textarea>
         </div>
         <div class="form-group">
           <input type="hidden" value="{{$dataKomik->komik_id}}" name="komik_id">
-          <input type="submit" class="btn btn-success" value="Kirim" style="float: right;">
+          <input type="submit" class="btn btn-success" id="sendButton" value="Kirim" style="float: right;">
         </div>
       </form>
     </div>
@@ -134,5 +134,15 @@
 @endsection
 
 @push('js')
-
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#sendButton').attr('disabled',true);
+        $('#message').keyup(function(){
+            if($(this).val().length !=0)
+                $('#sendButton').attr('disabled', false);
+            else
+                $('#sendButton').attr('disabled',true);
+        })
+    });
+</script>
 @endpush
