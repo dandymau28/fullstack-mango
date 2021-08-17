@@ -1,5 +1,8 @@
 body {
     background-color: white;
+    min-height: 400px;
+    margin-bottom: 3em;
+    clear: both;
 }
 
 .bg-comic {
