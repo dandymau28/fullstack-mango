@@ -28,6 +28,7 @@ class NilaiController extends Controller
                         ->select(DB::raw('sum(nilai.nilai_angka) as nilai, profil_user.nama, komik.judul'))
                         ->groupBy('nilai.user_id')
                         ->orderBy('nilai', 'desc')
+                        ->orderBy('created_at', 'asc')
                         ->get();
 
             return view('leaderboard')->with([
@@ -43,6 +44,7 @@ class NilaiController extends Controller
                         ->select(DB::raw('profil_user.user_id, sum(nilai.nilai_angka) as nilai, profil_user.nama, komik.judul'))
                         ->groupBy('nilai.user_id')
                         ->orderBy('nilai', 'desc')
+                        ->orderBy('created_at', 'asc')
                         ->get();
 
             return view('leaderboard')->with([
@@ -50,7 +52,7 @@ class NilaiController extends Controller
             ]);
         }
 
-        
+
     }
 
     /**
