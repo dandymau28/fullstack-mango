@@ -6,7 +6,7 @@ body {
 }
 
 b {
-    font-weight: 2000;
+    font-weight: 2000 !important;
 }
 
 .bg-comic {
