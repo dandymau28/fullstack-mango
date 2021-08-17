@@ -5,6 +5,10 @@ body {
     clear: both;
 }
 
+b {
+    font-weight: 2000;
+}
+
 .bg-comic {
     /* background-color: #D6D6D6; */
     background-color: white;
