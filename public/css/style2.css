@@ -5,8 +5,8 @@ body {
     clear: both;
 }
 
-b .modal-body {
-    font-weight: 2000 !important;
+b {
+    color: red;
 }
 
 .bg-comic {
