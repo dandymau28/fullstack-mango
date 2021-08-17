@@ -37,15 +37,19 @@ class KomentarController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->komentar);
+
         $komentar = new Komentar;
 
         $backUrl = app('url')->previous() . '#komentar';
+
+        $dataKomentar = str_replace("\r\n", "<br>", $request->input('komentar'));
 
         DB::beginTransaction();
         try {
             $komentar->user_id = auth()->user()->user_id;
             $komentar->komik_id = $request->input('komik_id');
-            $komentar->isi_komentar = $request->input('komentar');
+            $komentar->isi_komentar = $dataKomentar;
             $komentar->save();
         } catch (Exception $e) {
             DB::rollback();
