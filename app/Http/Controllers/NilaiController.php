@@ -11,7 +11,7 @@ class NilaiController extends Controller
         try {
             $data = Nilai::whereNull('deleted_at')
                     ->orderBy('nilai_angka', 'desc')
-                    ->orderBy('created_at', 'asc')
+                    ->orderBy('created_at', 'desc')
                     ->get();
         } catch (\Exception $e) {
             return response()->json([
