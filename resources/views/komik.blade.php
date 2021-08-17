@@ -106,11 +106,11 @@
     @foreach($komentars as $komentar)
       <div class="single-komentar">
         <div class="row">
-          <div class="col-sm-1">
+          {{-- <div class="col-sm-1">
               <div class="foto-komentar">
                 <img src="{{asset($komentar->foto_profil)}}" class="foto-komentar" style="object-fit: contain;">
               </div>
-          </div>
+          </div> --}}
           <div class="col">
             <div class="isi-komentar">
               <div class="row justify-content-between">
@@ -122,7 +122,7 @@
                 </div>
               </div>
               <div class="isi-komentar">
-                <span>{{$komentar->isi_komentar}}</span>
+                <span>{!!$komentar->isi_komentar!!}</span>
               </div>
             </div>
           </div>
@@ -132,3 +132,7 @@
     </div>
   </div>
 @endsection
+
+@push('js')
+
+@endpush
