@@ -17,7 +17,7 @@ class UserIsAdmin
     public function handle($request, Closure $next)
     {
         if (Auth::user()->role !== 'guru') {
-            return redirect('index');
+            return redirect('/');
         }
 
         return $next($request);
