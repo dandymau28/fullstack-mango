@@ -10,13 +10,15 @@ class NilaiController extends Controller
     public function index () {
         try {
             $data = Nilai::whereNull('deleted_at')
+                    ->orderBy('nilai_angka', 'desc')
+                    ->orderBy('created_at', 'asc')
                     ->get();
         } catch (\Exception $e) {
             return response()->json([
                 'code' => 500,
                 'message' => 'Internal Server Error. ErrMsg = '.$e->getMessage()
             ]);
-        } 
+        }
 
         if (!$data->isEmpty()) {
             return response()->json([
@@ -42,7 +44,7 @@ class NilaiController extends Controller
                 'code' => 500,
                 'message' => 'Internal Server Error. ErrMsg = '.$e->getMessage()
             ]);
-        } 
+        }
 
         if (!$data->isEmpty()) {
             return response()->json([
