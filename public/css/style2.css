@@ -109,7 +109,7 @@ body {
 } */
 
 .footer {
-    position: static;
+    /* position: static; */
     bottom: 0;
     width: 100%;
     background-color: #f5f5f5;
