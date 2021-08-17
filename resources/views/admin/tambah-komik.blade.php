@@ -92,7 +92,8 @@
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']]
+                ['table', ['table']],
+                ['color', ['color']]
             ]
         });
     });
@@ -179,7 +180,8 @@
                 ['font', ['strikethrough', 'superscript', 'subscript']],
                 ['fontsize', ['fontsize']],
                 ['para', ['ul', 'ol', 'paragraph']],
-                ['table', ['table']]
+                ['table', ['table']],
+                ['color', ['color']]
             ]
         });
         /* var formDiv = '<div class="form-group komik">';
