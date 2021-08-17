@@ -46,7 +46,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'auth',
+    'middleware' => ['auth', 'verify.guru'],
     'prefix' => 'admin-page'
 ], function($router) {
     Route::get('/','AdminController\DashboardController@index');
