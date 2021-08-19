@@ -21,7 +21,7 @@ class KomikController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Komik::all();
+            $data = Komik::has('buku')->get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('judul_buku', function($data) {
