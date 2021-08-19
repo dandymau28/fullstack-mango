@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DB;
+use App\Models\KomikModel as Komik;
 
 class DashboardController extends Controller
 {
@@ -14,7 +16,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $totalSiswa = DB::table('users')->where('role', 'siswa')->count();
+        $totalBuku = DB::table('buku')->whereNull('deleted_at')->count();
+        $totalKomik = Komik::has('buku')->count();
+
+        return view('admin.dashboard', [
+            'totalSiswa' => $totalSiswa,
+            'totalKomik' => $totalKomik,
+            'totalBuku' => $totalBuku,
+        ]);
     }
 
     /**
