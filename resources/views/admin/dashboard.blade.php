@@ -9,10 +9,9 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">CPU Traffic</span>
+                        <span class="info-box-text">Total Buku Tersedia</span>
                         <span class="info-box-number">
-                            10
-                            <small>%</small>
+                            {{$totalBuku}}
                         </span>
                     </div>
                     <!-- /.info-box-content -->
@@ -25,8 +24,8 @@
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Likes</span>
-                        <span class="info-box-number">41,410</span>
+                        <span class="info-box-text">Total Komik Terbit</span>
+                        <span class="info-box-number">{{$totalKomik}}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -35,7 +34,7 @@
             <!-- /.col -->
 
             <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
+            {{-- <div class="clearfix hidden-md-up"></div>
 
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
@@ -49,14 +48,14 @@
                 </div>
                 <!-- /.info-box -->
             </div>
-            <!-- /.col -->
+            <!-- /.col --> --}}
             <div class="col-12 col-sm-6 col-md-3">
                 <div class="info-box mb-3">
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">New Members</span>
-                        <span class="info-box-number">2,000</span>
+                        <span class="info-box-text">Total Siswa Mendaftar</span>
+                        <span class="info-box-number">{{ $totalSiswa }}</span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -67,6 +66,14 @@
         <!-- /.row -->
 
         <div class="row">
+            <div class="jumbotron jumbotron-fluid" style="background-color: transparent;">
+                <div class="container">
+                  <h1 class="display-4">Youkoso, Sensei!</h1>
+                  <p class="lead">七転び八起き</p>
+                </div>
+              </div>
+        </div>
+        {{-- <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -204,10 +211,10 @@
             </div>
             <!-- /.col -->
         </div>
-        <!-- /.row -->
+        <!-- /.row --> --}}
 
         <!-- Main row -->
-        <div class="row">
+        {{-- <div class="row">
             <!-- Left col -->
             <div class="col-md-8">
                 <!-- MAP & BOX PANE -->
@@ -846,7 +853,7 @@
                 <!-- /.card -->
             </div>
             <!-- /.col -->
-        </div>
+        </div> --}}
         <!-- /.row -->
     </div>
     <!--/. container-fluid -->
