@@ -109,6 +109,8 @@ class KomikController extends Controller
                         'alamat' => $path
                     ]);
 
+                    $request->materi[$i] = $request->materi[$i] ? $request->materi[$i] : " ";
+
                     $insertMateri = Materi::create([
                         'komik_id' => $insertKomik->komik_id,
                         'alamat_komik_id' => $insertAlamat->alamat_komik_id,
