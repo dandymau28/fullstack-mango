@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Models\BukuModel as Buku;
+use App\Models\KomikModel as Komik;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use DB;
@@ -184,7 +185,8 @@ class BukuController extends Controller
     {
         DB::beginTransaction();
         try {
-            $delete = Buku::destroy($id);
+            $deleteBuku = Buku::destroy($id);
+            $deleteKomik = Komik::where('buku_id', $id)->delete();
         } catch (Exception $e) {
             DB::rollback();
 
