@@ -21,11 +21,11 @@ class UjianController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Ujian::all();
+            $data = Ujian::has('komik')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('komik', function($data) {
-                    return $data->komik->judul;
+                    return $data->komik;
                 })
                 ->addColumn('action', function($data){
                     $btn = '<a href="ujian/' . $data->ujian_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->ujian_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
