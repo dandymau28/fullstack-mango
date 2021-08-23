@@ -25,7 +25,7 @@ class UjianController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('komik', function($data) {
-                    return $data->komik;
+                    return $data->komik->judul;
                 })
                 ->addColumn('action', function($data){
                     $btn = '<a href="ujian/' . $data->ujian_id . '" class="btn btn-warning btn-sm">Edit</a>' . "<button onclick='deleteUrl(" . $data->ujian_id  . ")' class='btn btn-danger btn-sm mx-2'>Delete</button>";
