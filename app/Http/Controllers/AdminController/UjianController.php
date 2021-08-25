@@ -44,7 +44,7 @@ class UjianController extends Controller
      */
     public function create()
     {
-        $komik = Komik::all();
+        $komik = Komik::has('buku')->get();
 
         return view('admin.tambah-ujian')->with([
             'daftar_komik' => $komik
@@ -122,7 +122,7 @@ class UjianController extends Controller
         foreach($soal as $nomor) {
             $pilihan_jawaban[$nomor->soal_id] = $nomor->pilihan_jawaban;
         }
-        $komik = Komik::all();
+        $komik = Komik::has('buku')->get();
         $unixTime = strtotime($ujian->waktu_ujian);
 
         return view('admin.edit-ujian')->with([
