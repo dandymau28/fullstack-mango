@@ -163,17 +163,21 @@ class UjianController extends Controller
 
             for ($i = 0; $i < $soalCount; $i++) {
                 $path = "";
-                if ($request->has('gambar'))  {
-                    $file_name = str_replace(' ', '-', $stateSoal) . '-' . ($i + 1) . '.' . $request->gambar[$i]->extension();
-                    $path = 'storage/' . $file_name;
-                    $upload = $request->gambar[$i]->storeAs('public', $file_name);
-                }
+                $stateSoal = "soal_" . $i;
                 if (isset($request->input('soal_id')[$i])) {
-                    $updateSoal = Soal::where('soal_id', $request->input('soal_id')[$i])->update([
+                    $dataUpdate = [
                         'pertanyaan' => $request->input('pertanyaan')[$i],
                         'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i],
-                        'gambar_soal' => $path
-                    ]);
+                    ];
+
+                    if (isset($request->gambar[$i])) {
+                        $file_name = str_replace(' ', '-', $stateSoal) . '-' . ($i + 1) . '.' . $request->gambar[$i]->extension();
+                        $path = 'storage/' . $file_name;
+                        $upload = $request->gambar[$i]->storeAs('public', $file_name);
+                        $dataUpdate["gambar_soal"] = $path;
+                    }
+
+                    $updateSoal = Soal::where('soal_id', $request->input('soal_id')[$i])->update($dataUpdate);
 
                     for ($j = 0; $j < 5; $j++) {
                         $updatePilihanJawaban = Jawaban::where('pilihan_jawaban_id', $request->input('jawaban_'. ($j + 1) .'_id')[$i])->update([
@@ -181,12 +185,20 @@ class UjianController extends Controller
                         ]);
                     }
                 } else {
-                    $insertSoal = Soal::create([
+                    $dataInsert = [
                         'pertanyaan' => $request->input('pertanyaan')[$i],
                         'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i],
-                        'ujian_id' => $id,
-                        'gambar_soal' => $path
-                    ]);
+                        'ujian_id' => $id
+                    ];
+
+                    if (isset($request->gambar[$i])) {
+                        $file_name = str_replace(' ', '-', $stateSoal) . '-' . ($i + 1) . '.' . $request->gambar[$i]->extension();
+                        $path = 'storage/' . $file_name;
+                        $upload = $request->gambar[$i]->storeAs('public', $file_name);
+                        $dataInsert["gambar_soal"] = $path;
+                    }
+
+                    $insertSoal = Soal::create($dataInsert);
 
                     for ($j = 0; $j < 5; $j++) {
                         $insertJawaban = Jawaban::create([
