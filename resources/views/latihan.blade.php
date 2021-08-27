@@ -17,7 +17,7 @@
               </div>
               @if (isset($value->gambar_soal))
               <div class="col">
-                  <img src="{{ asset($value->gambar_soal) }}" width="300px" height="300px" object-fit="contain" alt="" srcset="">
+                  <img src="{{ asset($value->gambar_soal) }}" width="300" height="200" object-fit="contain" alt="" srcset="">
               </div>
               @endif
           </div>
