@@ -16,7 +16,8 @@ class SoalModel extends Model
     protected $fillable = [
         'ujian_id',
         'pertanyaan',
-        'jawaban_benar'
+        'jawaban_benar',
+        'gambar_soal'
     ];
 
     protected $dates = [
