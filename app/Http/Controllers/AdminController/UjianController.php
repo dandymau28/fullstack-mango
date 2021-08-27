@@ -71,11 +71,16 @@ class UjianController extends Controller
                 $stateSoal = 'soal_' . ($i + 1);
 
                 // dd($request->input('jawaban_' . $request->input('jawaban_benar')[$stateSoal])[$i]);
+                // dd($request->ga);
+                $file_name = str_replace(' ', '-', $stateSoal) . '-' . ($i + 1) . '.' . $request->gambar[$i]->extension();
+                $path = 'storage/' . $file_name;
+                $upload = $request->gambar[$i]->storeAs('public', $file_name);
 
                 $insertSoal = Soal::create([
                     'ujian_id' => $insertUjian->ujian_id,
                     'pertanyaan' => $request->input('pertanyaan')[$i],
-                    'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')[$stateSoal])[$i]
+                    'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')[$stateSoal])[$i],
+                    'gambar_soal' => $path
                 ]);
 
                 for($j = 0; $j < 5; $j++) {
@@ -157,10 +162,17 @@ class UjianController extends Controller
             ]);
 
             for ($i = 0; $i < $soalCount; $i++) {
+                $path = "";
+                if ($request->has('gambar'))  {
+                    $file_name = str_replace(' ', '-', $stateSoal) . '-' . ($i + 1) . '.' . $request->gambar[$i]->extension();
+                    $path = 'storage/' . $file_name;
+                    $upload = $request->gambar[$i]->storeAs('public', $file_name);
+                }
                 if (isset($request->input('soal_id')[$i])) {
                     $updateSoal = Soal::where('soal_id', $request->input('soal_id')[$i])->update([
                         'pertanyaan' => $request->input('pertanyaan')[$i],
-                        'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i]
+                        'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i],
+                        'gambar_soal' => $path
                     ]);
 
                     for ($j = 0; $j < 5; $j++) {
@@ -172,7 +184,8 @@ class UjianController extends Controller
                     $insertSoal = Soal::create([
                         'pertanyaan' => $request->input('pertanyaan')[$i],
                         'jawaban_benar' => $request->input('jawaban_' . $request->input('jawaban_benar')['soal_' . ($i + 1)])[$i],
-                        'ujian_id' => $id
+                        'ujian_id' => $id,
+                        'gambar_soal' => $path
                     ]);
 
                     for ($j = 0; $j < 5; $j++) {
