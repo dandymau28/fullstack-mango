@@ -9,9 +9,18 @@
         @foreach($ujian->soal as $key => $value)
         <div class="soal" id="{{'soal_'.$key}}">
           もんだい <span>{{$key + 1}}</span>
-          <p class="my-3">
-            {!!$value->pertanyaan!!}
-          </p class="mx-3">
+          <div class="row">
+              <div class="col">
+                  <p class="my-3">
+                    {!!$value->pertanyaan!!}
+                  </p class="mx-3">
+              </div>
+              @if (isset($value->gambar_soal))
+              <div class="col">
+                  <img src="{{ asset($value->gambar_soal) }}" width="300px" height="300px" object-fit="contain" alt="" srcset="">
+              </div>
+              @endif
+          </div>
           <div class="my-4 jawaban">
             @foreach($value->pilihan_jawaban as $jawaban)
             <div class="radio-jawaban">

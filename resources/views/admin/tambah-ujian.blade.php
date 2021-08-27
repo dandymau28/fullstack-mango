@@ -48,6 +48,7 @@
                     <div class="d-flex justify-content-between">
                         <div>
                             <label for="soal-1">Soal 1</label>
+                            <img id="pertanyaan-1" src="#" width="100" height="100" style="object-fit: contain;" />
                         </div>
                         <div style="/*padding: 50px 0px;*/">
                             <button class="btn btn-danger btn-sm" id="hapus-soal" data-id="1"
@@ -56,6 +57,14 @@
                     </div>
                     <div class="input-group">
                         <textarea class="textarea" name="pertanyaan[]" id="pertanyaan-1"></textarea>
+                    </div>
+                    <span><strong>Pilih gambar untuk soal (opsional)</strong></span>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="pertanyaan-1" name="gambar[]" data-pertanyaan="pertanyaan-1"
+                                onchange="showImage(this);">
+                            <label class="custom-file-label" for="pertanyaan-1">Pilih file gambar soal</label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row my-2">
@@ -137,6 +146,7 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <label for="soal-${count}">Soal ${count}</label>
+                        <img id="pertanyaan-${count}" src="#" width="100" height="100" style="object-fit: contain;" />
                     </div>
                     <div style="/*padding: 50px 0px;*/">
                         <button class="btn btn-danger btn-sm" id="hapus-soal" data-id="${count}"
@@ -145,6 +155,14 @@
                 </div>
                 <div class="input-group">
                     <textarea class="textarea" name="pertanyaan[]" id="pertanyaan-${count}"></textarea>
+                </div>
+                <span><strong>Pilih gambar untuk soal (opsional)</strong></span>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="pertanyaan-${count}" name="gambar[]" data-pertanyaan="pertanyaan-${count}"
+                            onchange="showImage(this);">
+                        <label class="custom-file-label" for="pertanyaan-${count}">Pilih file</label>
+                    </div>
                 </div>
             </div>
             <div class="form-row my-2">
@@ -223,7 +241,7 @@
     });
 
     function showImage(input) {
-        var target = $(input).attr("data-panel");
+        var target = $(input).attr("data-pertanyaan");
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
