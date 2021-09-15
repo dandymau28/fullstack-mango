@@ -189,6 +189,15 @@ footer {
     margin-top: -200px;
 }
 
+.modal-body .table {
+    width: 100% !important;
+    table-layout: fixed;
+}
+
+.modal-body th,td {
+    word-wrap: break-word;
+}
+
 @media (max-width: 768px) {
     .jawaban {
         margin-right: 5em;
